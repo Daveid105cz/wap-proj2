@@ -1,10 +1,13 @@
 import type { Game } from "@/types/Game";
 import type { GameDeal } from "@/types/GameDeal";
+import type { SearchFilter } from "@/types/SearchFilter";
 import client from "./AxiosClient";
 
+
 export class CheapSharkService {
-    public async getDeals(): Promise<GameDeal[]> {
-        const response = await client.get("/deals");
+    public async getDeals(query: string, filter: SearchFilter): Promise<GameDeal[]> {
+        const response = await client.get(`/deals?title=${query}`, { params: filter });
+        // const response = await client.get("/deals");
         return response.data;
     }
 
@@ -14,3 +17,5 @@ export class CheapSharkService {
     }
 }
 
+const cheapSharkService = new CheapSharkService();
+export default cheapSharkService;
