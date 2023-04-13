@@ -11,32 +11,23 @@
             </div>
         </div>
     </div>
+
 </template>
 
 <script setup lang="ts">
 // import type { SearchFilter } from '@/services/CheapSharkService';
 import { useSearchStore } from '@/stores/searchStore';
+import { queryObjToSearchFilter, queryObjToSortOrder } from '@/types/SearchFilter';
 import { useRoute } from 'vue-router';
 
 const currentRoute = useRoute();
 const query = currentRoute.query;
-
+console.log(query);
 const searchStore = useSearchStore();
-// priceMin?: number;
-//     priceMax?: number;
-//     metacritic?: number;
-//     steamRating?: number;
-//     sortBy?: SortBy;
-//     sortOrder?: SortOrder;
-//     storeId?: string;
-// searchStore.filter.priceMin = query.priceMin as number;
-// searchStore.filter.priceMax = query.priceMax as number;
-// searchStore.filter.metacritic = query.metacritic as string;
-// searchStore.filter.steamRating = query.steamRating as string;
-// searchStore.filter.storeId = query.storeId as string;
-
+searchStore.searchQuery = query.title as string;
+searchStore.filter = queryObjToSearchFilter(query);
+searchStore.sortOrder = queryObjToSortOrder(query);
 searchStore.search();
-
 
 
 </script>

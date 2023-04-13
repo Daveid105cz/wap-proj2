@@ -12,30 +12,29 @@ export enum SortBy {
     Recent
 };
 export interface SearchFilter{
-    priceMin?: number;
-    priceMax?: number;
+    lowerPrice?: number;
+    upperPrice?: number;
     metacritic?: number;
-    steamRating?: number;
-    sortBy?: SortBy;
-    sortOrder?: SortOrder;
+    steamRating?: number
     storeId?: string;
 };
 
-function queryObjToSearchFilter(queryObj: any): SearchFilter {
+export function queryObjToSearchFilter(queryObj: any): SearchFilter {
     const filter: SearchFilter = {};
-    if (queryObj.priceMin)
-        filter.priceMin = Number(queryObj.priceMin);
-    if (queryObj.priceMax)
-        filter.priceMax = Number(queryObj.priceMax);
+    if (queryObj.lowerPrice)
+        filter.lowerPrice = Number(queryObj.lowerPrice);
+    if (queryObj.upperPrice)
+        filter.upperPrice = Number(queryObj.upperPrice);
     if (queryObj.metacritic)
         filter.metacritic = Number(queryObj.metacritic);
     if (queryObj.steamRating)
         filter.steamRating = Number(queryObj.steamRating);
-    if (queryObj.sortBy)
-        filter.sortBy = Number(queryObj.sortBy);
-    if (queryObj.sortOrder)
-        filter.sortOrder = Number(queryObj.sortOrder);
     if (queryObj.storeId)
         filter.storeId = queryObj.storeId;
     return filter;
+}
+export function queryObjToSortOrder(queryObj: any): SortOrder {
+    if (queryObj.sortOrder)
+        return Number(queryObj.sortOrder);
+    return SortOrder.Descending;
 }
