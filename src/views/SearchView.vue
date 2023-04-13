@@ -20,6 +20,8 @@ import { useSearchStore } from '@/stores/searchStore';
 import { queryObjToSearchFilter, queryObjToSortOrder } from '@/types/SearchFilter';
 import { useRoute } from 'vue-router';
 
+import cheapSharkService from '@/services/CheapSharkService';
+
 const currentRoute = useRoute();
 const query = currentRoute.query;
 console.log(query);
@@ -29,5 +31,6 @@ searchStore.filter = queryObjToSearchFilter(query);
 searchStore.sortOrder = queryObjToSortOrder(query);
 searchStore.search();
 
-
+// const storess = await cheapSharkService.getStores()
+// console.log(storess);   
 </script>
