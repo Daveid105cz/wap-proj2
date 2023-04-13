@@ -7,6 +7,7 @@
         <p>{{ normalPrice }}</p>
         <p>{{ salePrice }}</p>
         <p>{{ dealRating }}</p>
+        <p>{{ dealID }}</p>
       </div>
     </div>
   </template>
@@ -35,6 +36,10 @@
         default: "0.0"
       },
       dealRating: {
+        type: String,
+        default: "0.0"
+      },
+      dealID: {
         type: String,
         default: "0.0"
       }

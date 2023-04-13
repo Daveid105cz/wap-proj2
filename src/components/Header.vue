@@ -5,7 +5,7 @@
         <router-link to="/stores">Stores</router-link>
       </nav>
       <div class="logo">
-        <a href="/">My Website</a>
+        <a href="/">Best Game Deals</a>
       </div>
       <nav class="nav-links right">
         <router-link to="/about">About</router-link>

@@ -1,36 +1,46 @@
 <template>
+  <div class="home">
+    <div class="top10Text">Today's TOP 10 Deals </div>
     <div class="top-deals-container">
       <div v-if="isLoading">Loading...</div>
       <div v-else class="top-deals-grid">
         <div v-for="(groupedDeal, index) in topDeals" :key="groupedDeal.id">
-          <TopDeal
-            :gameTitle="groupedDeal.deals[0].title"
-            :gameImage="groupedDeal.deals[0].thumb"
-            :storeName="groupedDeal.deals[0].storeID"
-            :normalPrice="groupedDeal.deals[0].normalPrice"
-            :salePrice="groupedDeal.deals[0].salePrice"
-            :dealRating="groupedDeal.deals[0].dealRating"
-          />
+          <div class="top-deal-container">
+            <div class="top-deal-image">
+              <img :src="groupedDeal.deals[0].thumb" width="400" height="600" />
+              <div class="top-deal-details">
+                <div class="top-deal-price">Deal rating: {{ groupedDeal.deals[0].dealRating }}</div>
+                <div class="top-deal-price">Original price: {{ groupedDeal.deals[0].normalPrice }}</div>
+                <div class="top-deal-price">Sale price: {{ groupedDeal.deals[0].salePrice }}</div>
+                <div class="top-deal-store">Store ID: {{ groupedDeal.deals[0].storeID }}</div>
+              </div>
+            </div>
+            <div class="top-deal-title">{{ groupedDeal.deals[0].title }}</div>
+          </div>
         </div>
       </div>
     </div>
-  </template>
+  </div>
+
+</template>
   
   <script lang="ts">
   import { defineComponent, computed } from "vue";
   import { useHomeStore } from "@/stores/homeStore";
   import TopDeal from "@/components/home/TopDeal.vue";
-  
+  import { getSortByWithNames } from '@/types/SearchFilter';
+
+
   export default defineComponent({
     components: {
       TopDeal,
     },
     setup() {
-      const store = useHomeStore();
-      const isLoading = computed(() => store.isLoading);
-      const groupedDeals = computed(() => store.groupedDeals);
-      const topDeals = computed(() => store.groupedDeals.slice(0, 10));
-      console.log(groupedDeals);
+      const homeStore = useHomeStore();
+      const isLoading = computed(() => homeStore.isLoading);
+      const groupedDeals = computed(() => homeStore.groupedDeals);
+      const topDeals = computed(() => homeStore.groupedDeals.slice(0, 10));
+      
   
       return {
         isLoading,
@@ -48,7 +58,14 @@
   });
   </script>
 
+
 <style scoped>
+.top10Text {
+  font-size: 35px; /* Change the font size to the desired value */
+  text-align: center; /* Center the text */
+}
+
+
 .top-deals-container {
   display: flex;
   justify-content: center;
@@ -60,5 +77,89 @@
   grid-auto-rows: minmax(300px, auto);
   grid-gap: 20px;
 }
+
+.top-deal {
+  position: relative;
+}
+
+.top-deals-grid img {
+  width: 300px;
+  height: 200px;
+}
+
+
+.game-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.game-details {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.top-deal-image {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.top-deal-image img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.top-deal-details {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  text-align: center;
+  padding: 10px;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.top-deal-image:hover .top-deal-details {
+  opacity: 1;
+}
+
+.top-deal-title {
+  margin: 8px;
+  font-size: 20px;
+}
+
+.store-details {
+  display: none;
+}
+
+.top-deal:hover .game-image {
+  opacity: 0;
+}
+
+.top-deal:hover .store-details {
+  display: block;
+}
 </style>
-  

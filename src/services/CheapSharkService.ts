@@ -6,9 +6,9 @@ import client from "./AxiosClient";
 
 
 export class CheapSharkService {
-    public async getDeals(query: string, 
-                filter: SearchFilter, sortBy: SortBy , 
-                sortOrder: SortOrder, page: number = 0, 
+    public async getDeals(query: string = "", 
+                filter: SearchFilter = {}, sortBy?: SortBy , 
+                sortOrder?: SortOrder, page: number = 0, 
                 pageSize: number = 60 
             ): Promise<GameDeal[]> {
         const paramsObject = {

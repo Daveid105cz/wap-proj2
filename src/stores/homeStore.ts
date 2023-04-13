@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
 import apiService from '../services/CheapSharkService'
 import type { GameDeal } from '@/types/GameDeal';
-import type { SearchFilter } from '@/types/SearchFilter';
+import { SortBy, SortOrder, type SearchFilter } from '@/types/SearchFilter';
+
 
 interface GroupedDeal {
     id: string;
@@ -10,13 +11,22 @@ interface GroupedDeal {
     deals: GameDeal[];
 };
 
+interface GroupedDealByStore {
+    storeID: string;
+    deals: GameDeal[];
+};
+
 export const useHomeStore = defineStore({
     id: 'home',
     state: () => ({
         isLoading: false,
         filter: {} as SearchFilter,
+        sortBy: SortBy.DealRating,
+        sortOrder: SortOrder.Ascending,
         deals: [] as GameDeal[],
+        dealsByStore: [] as GameDeal[],
         groupedDeals: [] as GroupedDeal[],
+        groupedDealsBystore: [] as GroupedDealByStore[],
         page: 1,
         totalCount: 0,
         pageSize: 40
@@ -24,9 +34,16 @@ export const useHomeStore = defineStore({
     actions: {
         async fetchDeals() {
             this.isLoading = true;
-            const gameDeals = await apiService.getDeals("", this.filter);
+            const gameDeals = await apiService.getDeals();
             this.deals = gameDeals;
             this.groupedDeals = this.groupDeals(gameDeals);
+            this.isLoading = false;
+        },
+        async fetchDealsByStore() {
+            this.isLoading = true;
+            const dealsByStore = await apiService.getDeals();
+            this.dealsByStore = dealsByStore;
+            this.groupedDealsBystore = this.groupDealsByStore(dealsByStore);
             this.isLoading = false;
         },
         groupDeals(deals: GameDeal[]): GroupedDeal[] {
@@ -44,6 +61,23 @@ export const useHomeStore = defineStore({
                 }
                 return acc;
             }, []);
+        },
+
+        groupDealsByStore(deals: GameDeal[]): GroupedDealByStore[] {
+            return deals.reduce((acc: GroupedDealByStore[], deal: GameDeal) => {
+                const store = acc.find(x => x.storeID === deal.storeID);
+                if (store)
+                    store.deals.push(deal);
+                else {
+                    acc.push({
+                        storeID: deal.storeID,
+                        deals: [deal]
+                    });
+                }
+                return acc;
+            }, []);
         }
+        
+        
     }
 });
