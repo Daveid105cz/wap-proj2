@@ -1,0 +1,64 @@
+<template>
+    <div class="header">
+      <nav class="nav-links left">
+        <router-link to="/">Home</router-link>
+        <router-link to="/stores">Stores</router-link>
+      </nav>
+      <div class="logo">
+        <a href="/">My Website</a>
+      </div>
+      <nav class="nav-links right">
+        <router-link to="/about">About</router-link>
+        <router-link to="/contact">Contact</router-link>
+      </nav>
+    </div>
+  </template>
+  
+  <script lang="ts">
+  export default {
+    name: 'Header',
+  };
+  </script>
+  
+  <style scoped>
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 16px;
+  }
+  
+  .logo {
+    flex-grow: 1;
+    text-align: center;
+  }
+  
+  .logo a {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .nav-links.left {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .nav-links.right {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .nav-links router-link {
+    margin-right: 16px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .nav-links router-link.active {
+    font-weight: bold;
+  }
+  </style>
+  
