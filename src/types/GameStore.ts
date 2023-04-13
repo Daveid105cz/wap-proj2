@@ -5,7 +5,7 @@ export interface GameStoreThumbnail {
 };
 
 export interface GameStore {
-    storeId: string;
+    storeID: number;
     storeName: string;
     thumbnail: string;
     isActive: boolean;

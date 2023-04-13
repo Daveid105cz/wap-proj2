@@ -29,7 +29,7 @@ export class CheapSharkService {
         return response.data[0];
     }
 
-    public async getStores(): Promise<GameStore> {
+    public async getStores(): Promise<GameStore[]> {
         const response = await client.get(`/stores`);
         return response.data;
     }
