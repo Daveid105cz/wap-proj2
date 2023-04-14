@@ -10,8 +10,9 @@
               <img :src="groupedDeal.deals[0].thumb" width="400" height="600" />
               <div class="top-deal-details">
                 <div class="top-deal-price">Deal rating: {{ groupedDeal.deals[0].dealRating }}</div>
-                <div class="top-deal-price">Original price: {{ groupedDeal.deals[0].normalPrice }}</div>
-                <div class="top-deal-price">Sale price: {{ groupedDeal.deals[0].salePrice }}</div>
+                <div class="top-deal-price">Original price: {{ groupedDeal.deals[0].normalPrice }}$</div>
+                <div class="top-deal-price">Sale price: {{ groupedDeal.deals[0].salePrice }}$</div>
+                <div class="top-deal-price">Savings: {{Math.round(Number( groupedDeal.deals[0].savings))  }}%</div>
                 
                 <div class="top-deal-store">
                   <img :src="getStoreBanner(groupedDeal.deals[0].storeID)" />
@@ -101,6 +102,7 @@ export default defineComponent({
 .top-deal-store {
   width: 212px;
   height: 50px;
+  margin-top: 20px;
   
 }
 

@@ -24,8 +24,9 @@
                   <div class="top-deal-title">{{ deal.title }}</div>
                 </router-link>
                 <div class="top-deal-price">Deal rating: {{ deal.dealRating }}</div>
-                <div class="top-deal-price">Original price: {{ deal.normalPrice }}</div>
-                <div class="top-deal-price">Sale price: {{ deal.salePrice }}</div>
+                <div class="top-deal-price">Original price: {{ deal.normalPrice }}$</div>
+                <div class="top-deal-price">Sale price: {{ deal.salePrice }}$</div>
+                <div class="top-deal-price">Savings: {{Math.round(Number(  deal.savings))  }}%</div>
               </div>
             </div>
           </div>
@@ -110,6 +111,11 @@
   display: grid;
   grid-template-columns: 100px 1fr;
   gap: 10px;
+  align-items: center;
+}
+
+.deal-info {
+  margin-top: 20px;
   align-items: center;
 }
 
