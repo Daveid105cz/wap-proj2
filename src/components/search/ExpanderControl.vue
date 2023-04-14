@@ -12,16 +12,12 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 
-const emit = defineEmits<{
-    (event: 'update:isExpanded', payload: boolean): void;
-}>();
-
 const isExpanded = ref(false);
 
 function toggleExpanded() {
     console.log("toggleExpanded");
     isExpanded.value = !isExpanded.value;
-    emit('update:isExpanded', !isExpanded.value);
+
 }
 
 </script>
