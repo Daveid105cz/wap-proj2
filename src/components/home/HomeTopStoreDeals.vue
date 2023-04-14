@@ -25,14 +25,10 @@
   <script lang="ts">
   import { defineComponent, computed } from "vue";
   import { useHomeStore } from "@/stores/homeStore";
-  import TopDeal from "@/components/home/TopDeal.vue";
   import Spinner from '@/components/Spinner.vue';
   
   export default defineComponent({
-    components: {
-      TopDeal,
-    },
-    
+
     setup() {
       const homeStore = useHomeStore();
       const isLoading = computed(() => homeStore.isLoading);
