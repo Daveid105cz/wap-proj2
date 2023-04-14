@@ -9,15 +9,19 @@
         </select>
         <button @click="searchStore.search()">Search</button>
         <div v-if="!searchStore.isLoading">
-            <div v-for="game in searchStore.groupedDeals" :key="game.id">
-            <h2>{{ game.title }}</h2>
-            <img :src="game.thumbnail" />
-            <div v-for="deal in game.deals" :key="deal.dealID">
-                <p>{{ deal.storeID }}</p>
-                <p>{{ deal.normalPrice }}</p>
-                <p>{{ deal.salePrice }}</p>
-            </div>
-        </div>
+            <ExpanderControl v-for="game in searchStore.groupedDeals" :key="game.id">
+                <template #header>
+                    <img :src="game.thumbnail" />
+                    <h2>{{ game.title }}</h2>
+                </template>
+                <template #content>
+                    <div v-for="deal in game.deals" :key="deal.dealID">
+                        <p>{{ deal.storeID }}</p>
+                        <p>{{ deal.normalPrice }}</p>
+                        <p>{{ deal.salePrice }}</p>
+                    </div>
+                </template>
+            </ExpanderControl>
         </div>
         
         <Spinner v-if="searchStore.isLoading" />
@@ -34,6 +38,7 @@ import FiltersPanel from '@/components/search/FiltersPanel.vue';
 import Spinner from '@/components/Spinner.vue';
 import SortOrderToggle from '@/components/inputs/SortOrderToggle.vue';
 import { computed } from 'vue';
+import ExpanderControl from '@/components/search/ExpanderControl.vue';
 
 
 const currentRoute = useRoute();
