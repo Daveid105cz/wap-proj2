@@ -1,5 +1,5 @@
 <template>
-    <div class="sort-order-button" @click="btnClicked">
+    <div class="sort-order-button my-input" @click="btnClicked">
         <img class="sort-icon" :class="{ 'asc': isAsc, 'desc': isDesc }" :src="svgSource" />
     </div>
   </template>
@@ -46,11 +46,13 @@ function btnClicked() {
     cursor: pointer;
     width: 48px;
     height: 48px;
+    margin: 0;
+    padding: 4px;
 }
 
 .sort-icon {
-    width: 48px;
-    height: 48px;
+    width: 95%;
+    height: 95%;
     transition: transform 0.3s ease;
     border: 0px;
     /* background-color: red; */

@@ -1,10 +1,11 @@
 <template>
     <div class="num-input-container">
-        <label :for="theInput?.value">{{label}}</label>
-        <input type="number" :placeholder="placeholder" ref="theInput"
+        <label class="my-label" :for="theInput?.value">{{label}}</label>
+        <input class="my-input" type="number" :placeholder="placeholder" ref="theInput"
             :value="modelValue" 
             :min="minVal" :max="maxVal"
             @keyup="valueChanged($event)" @focusout="focusLost($event)"/>
+        <label class="my-label" v-if="postLabel">{{postLabel}}</label>
     </div>
 </template>
 
@@ -19,6 +20,7 @@ const props = defineProps<{
     minVal?: number;
     maxVal?: number;
     label?: string;
+    postLabel?: string;
 }>();
 
 const emit = defineEmits<{
@@ -85,5 +87,19 @@ function valueChanged(event: KeyboardEvent|null) {
 .num-input-container {
     display: flex;
     flex-direction: row;
+    align-items: center;
+}
+.num-input-container input{
+    height: 28px;
+}
+.num-input-container label{
+    color: var(--color-heading);
+    margin-right: 0.5rem;
+    font-size: 1rem;
+    vertical-align: baseline;
+}
+.num-input-container label:last-child{
+    margin-right: 0;
+    margin-left: 0.5rem;
 }
 </style>

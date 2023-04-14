@@ -72,3 +72,16 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
+.my-label{
+    color: var(--color-heading);
+    font-size: 1rem;
+    vertical-align: baseline;
+}
+.my-input{
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
