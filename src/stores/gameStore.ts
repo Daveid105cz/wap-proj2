@@ -2,18 +2,19 @@ import { defineStore } from 'pinia'
 import apiService from '../services/CheapSharkService'
 import type { GameDeal } from '@/types/GameDeal';
 import type { Game } from '@/types/Game';
+import type { GameStore } from '@/types/GameStore';
 import { SortBy, SortOrder, type SearchFilter } from '@/types/SearchFilter';
 
 
 interface GroupedDeal {
-    id: string;
+    id: number;
     title: string;
     thumbnail: string;
     deals: GameDeal[];
 };
 
 interface GroupedDealByGame {
-    gameID: string;
+    gameID: number;
     deals: GameDeal[];
 };
 
@@ -28,13 +29,16 @@ export const useGameStore = defineStore({
         groupedDealsByGame: [] as GroupedDealByGame[],
         page: 1,
         totalCount: 0,
-        pageSize: 40
+        pageSize: 40,
+        stores: [] as GameStore[]
     }),
     actions: {
+        async loadStores(){
+            this.stores = await apiService.getStores();
+        },
         async fetchGame(id: string) {
             this.isLoading = true;
             this.game = await apiService.getGame(id);
-            console.log(this.game.deals);
             this.isLoading = false;
         },
         async fetchDealsByGame() {

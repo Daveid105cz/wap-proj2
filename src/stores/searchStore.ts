@@ -6,7 +6,7 @@ import { SortBy, SortOrder, type SearchFilter } from '@/types/SearchFilter';
 import type { GameStore } from '@/types/GameStore';
 
 interface GroupedDeal {
-    id: string;
+    id: number;
     title: string;
     thumbnail: string;
     deals: GameDeal[];

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Header></Header>
     <GameSearch></GameSearch>
     <GameWindow :id="value"></GameWindow>
   </div>
@@ -9,11 +10,13 @@
 
 import GameWindow from "@/components/game/GameWindow.vue";
 import GameSearch from '../components/home/HomeSearch.vue'
+import Header from '../components/Header.vue'
 
 export default {
   components: {
     GameWindow,
-    GameSearch
+    GameSearch,
+    Header
   },
   data() {
     return {

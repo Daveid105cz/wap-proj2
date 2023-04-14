@@ -17,9 +17,11 @@
   <style scoped>
   .game-search {
     display: flex;
+    font-size: 25px;
     flex-direction: column;
     align-items: center;
     padding: 16px;
+    background-color: #4d0d34;
   }
   
   .search-bar {

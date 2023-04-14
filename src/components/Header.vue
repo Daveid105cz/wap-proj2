@@ -2,6 +2,10 @@
     <div class="header">
       <nav class="nav-links left">
         <router-link to="/">Home</router-link>
+
+      </nav>
+      <nav class="nav-links left">
+
         <router-link to="/stores">Stores</router-link>
       </nav>
       <div class="logo">
@@ -9,6 +13,10 @@
       </div>
       <nav class="nav-links right">
         <router-link to="/about">About</router-link>
+
+      </nav>
+      <nav class="nav-links right">
+
         <router-link to="/contact">Contact</router-link>
       </nav>
     </div>
@@ -27,6 +35,7 @@
     align-items: center;
     background-color: #f2f2f2;
     padding: 16px;
+    
   }
   
   .logo {
@@ -35,7 +44,7 @@
   }
   
   .logo a {
-    font-size: 24px;
+    font-size: 50px;
     font-weight: bold;
     text-decoration: none;
     color: #333;
@@ -43,11 +52,17 @@
   
   .nav-links.left {
     display: flex;
+    font-size: 25px;
+    margin-left: 30px;
+    margin-right: 30px;
     justify-content: flex-start;
   }
   
   .nav-links.right {
     display: flex;
+    font-size: 25px;
+    margin-left: 30px;
+    margin-right: 30px;
     justify-content: flex-end;
   }
   

@@ -1,7 +1,7 @@
 export interface Game {
     info: {
       title: string;
-      steamAppID: string;
+      steamAppID: number;
       thumb: string;
     };
     cheapestPriceEver: {
@@ -9,8 +9,8 @@ export interface Game {
       date: number;
     };
     deals: {
-      storeID: string;
-      dealID: string;
+      storeID: number;
+      dealID: number;
       price: string;
       retailPrice: string;
       savings: string;

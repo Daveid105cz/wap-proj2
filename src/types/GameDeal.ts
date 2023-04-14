@@ -2,9 +2,9 @@
 //TODO: fix the types of the properties
 export interface GameDeal {
     title: string;
-    dealID: string;
-    storeID: string;
-    gameID: string;
+    dealID: number;
+    storeID: number;
+    gameID: number;
     salePrice: string;
     normalPrice: string;
     isOnSale: string;

@@ -5,68 +5,108 @@
       <Spinner v-if="isLoading" />
       <div v-else class="top-deals-grid">
         <div v-for="(groupedDeal, index) in topDeals" :key="groupedDeal.id">
-          <a :href="'/game/' + groupedDeal.deals[0].gameID" class="top-deal-container">
+          <RouterLink :to="'/game/' + groupedDeal.deals[0].gameID" class="top-deal-container">
             <div class="top-deal-image">
               <img :src="groupedDeal.deals[0].thumb" width="400" height="600" />
               <div class="top-deal-details">
                 <div class="top-deal-price">Deal rating: {{ groupedDeal.deals[0].dealRating }}</div>
                 <div class="top-deal-price">Original price: {{ groupedDeal.deals[0].normalPrice }}</div>
                 <div class="top-deal-price">Sale price: {{ groupedDeal.deals[0].salePrice }}</div>
-                <div class="top-deal-store">Store ID: {{ groupedDeal.deals[0].storeID }}</div>
+                
+                <div class="top-deal-store">
+                  <img :src="getStoreBanner(groupedDeal.deals[0].storeID)" />
+                </div>
               </div>
             </div>
             <div class="top-deal-title">{{ groupedDeal.deals[0].title }}</div>
-          </a>
+          </RouterLink>
         </div>
       </div>
     </div>
-
   </div>
-
 </template>
+
   
-  <script lang="ts">
-  import { defineComponent, computed } from "vue";
-  import { useHomeStore } from "@/stores/homeStore";
-  import Spinner from '@/components/Spinner.vue';
-  import { getSortByWithNames } from '@/types/SearchFilter';
+<script lang="ts">
+import { defineComponent, computed } from "vue";
+import { useHomeStore } from "@/stores/homeStore";
+import Spinner from '@/components/Spinner.vue';
+import { getSortByWithNames } from '@/types/SearchFilter';
+import type { GameStore, GameStoreThumbnail } from '@/types/GameStore';
 
 
-  export default defineComponent({
-    setup() {
-      const homeStore = useHomeStore();
-      const isLoading = computed(() => homeStore.isLoading);
-      const groupedDeals = computed(() => homeStore.groupedDeals);
-      const topDeals = computed(() => homeStore.groupedDeals.slice(0, 10));
-      
+export default defineComponent({
+  components: {
+    Spinner,
+  },
+
   
-      return {
-        isLoading,
-        topDeals,
-      };
-    },
-    created() {
-      this.fetchDeals();
-    },
-    methods: {
-      async fetchDeals() {
-        await useHomeStore().fetchDeals();
-      },
-    },
-  });
-  </script>
+  setup() {
+    const homeStore = useHomeStore();
+    const isLoading = computed(() => homeStore.isLoading);
+    const groupedDeals = computed(() => homeStore.groupedDeals);
+    const topDeals = computed(() => homeStore.groupedDeals.slice(0, 10));
+    const stores = computed(() => homeStore.stores);
 
+
+
+    return {
+      isLoading,
+      topDeals,
+      stores,
+      homeStore
+    };
+  },
+  created() {
+    this.fetchDeals();
+    this.getStores();
+  },
+  methods: {
+    async fetchDeals() {
+      await useHomeStore().fetchDeals();
+    },
+    async getStores() {
+      await useHomeStore().loadStores();
+    },
+    getStoreIcon(storeID: number){
+      const store = useHomeStore().stores.find(s => s.storeID === storeID);
+      return "https://www.cheapshark.com"+store?.images.icon;
+  },
+    getStoreBanner(storeID: number){
+        const store = useHomeStore().stores.find(s => s.storeID === storeID);
+        return "https://www.cheapshark.com"+store?.images.banner;
+    }
+    
+    
+  },
+});
+
+
+</script>
 
 <style scoped>
 .top10Text {
-  font-size: 35px; /* Change the font size to the desired value */
-  text-align: center; /* Center the text */
+  font-size: 50px;
+  text-align: center;
+  margin-bottom: 50px;
+  margin-top: 50px;
 }
 
 
 .top-deals-container {
   display: flex;
   justify-content: center;
+  
+}
+.top-deal-store {
+  width: 212px;
+  height: 50px;
+  
+}
+
+.top-deal-store img {
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .top-deals-grid {
@@ -74,10 +114,13 @@
   grid-template-columns: repeat(5, 1fr);
   grid-auto-rows: minmax(300px, auto);
   grid-gap: 20px;
+  
+  
 }
 
 .top-deal {
   position: relative;
+  
 }
 
 .top-deals-grid img {
@@ -95,6 +138,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  
 }
 
 .game-details {
@@ -138,6 +182,7 @@
   padding: 10px;
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
+  
 }
 
 .top-deal-image:hover .top-deal-details {
@@ -147,6 +192,7 @@
 .top-deal-title {
   margin: 8px;
   font-size: 20px;
+  
 }
 
 .store-details {
