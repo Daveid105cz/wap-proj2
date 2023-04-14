@@ -102,10 +102,12 @@
 
 .top-deals-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(200px, 1fr)); /* add this line */
   grid-template-rows: repeat(2, 1fr);
   gap: 50px;
 }
+
+
 
 .deal-item {
   display: grid;

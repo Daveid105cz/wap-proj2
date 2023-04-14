@@ -102,7 +102,7 @@ export default defineComponent({
 .top-deal-store {
   width: 212px;
   height: 50px;
-  margin-top: 20px;
+  margin-top: 10px;
   
 }
 
@@ -115,7 +115,7 @@ export default defineComponent({
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-auto-rows: minmax(300px, auto);
-  grid-gap: 20px;
+  grid-gap: 5px;
   
   
 }
@@ -194,7 +194,7 @@ export default defineComponent({
 .top-deal-title {
   margin: 8px;
   font-size: 20px;
-  
+  text-align: center;
 }
 
 .store-details {
