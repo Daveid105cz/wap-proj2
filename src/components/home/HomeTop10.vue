@@ -2,10 +2,10 @@
   <div class="home">
     <div class="top10Text">Today's TOP 10 Deals </div>
     <div class="top-deals-container">
-      <div v-if="isLoading">Loading...</div>
+      <Spinner v-if="isLoading" />
       <div v-else class="top-deals-grid">
         <div v-for="(groupedDeal, index) in topDeals" :key="groupedDeal.id">
-          <div class="top-deal-container">
+          <a :href="'/game/' + groupedDeal.deals[0].gameID" class="top-deal-container">
             <div class="top-deal-image">
               <img :src="groupedDeal.deals[0].thumb" width="400" height="600" />
               <div class="top-deal-details">
@@ -16,10 +16,11 @@
               </div>
             </div>
             <div class="top-deal-title">{{ groupedDeal.deals[0].title }}</div>
-          </div>
+          </a>
         </div>
       </div>
     </div>
+
   </div>
 
 </template>
@@ -27,14 +28,11 @@
   <script lang="ts">
   import { defineComponent, computed } from "vue";
   import { useHomeStore } from "@/stores/homeStore";
-  import TopDeal from "@/components/home/TopDeal.vue";
+  import Spinner from '@/components/Spinner.vue';
   import { getSortByWithNames } from '@/types/SearchFilter';
 
 
   export default defineComponent({
-    components: {
-      TopDeal,
-    },
     setup() {
       const homeStore = useHomeStore();
       const isLoading = computed(() => homeStore.isLoading);

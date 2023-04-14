@@ -1,11 +1,26 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div>
+    <GameSearch></GameSearch>
+    <GameWindow :id="value"></GameWindow>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
 
+import GameWindow from "@/components/game/GameWindow.vue";
+import GameSearch from '../components/home/HomeSearch.vue'
+
+export default {
+  components: {
+    GameWindow,
+    GameSearch
+  },
+  data() {
+    return {
+      value: this.$route.params.id.toString()
+    };
+  }
+};
 </script>
 
 <style>

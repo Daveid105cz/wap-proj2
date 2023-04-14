@@ -26,8 +26,27 @@ export class CheapSharkService {
 
     public async getGame(gameId: string): Promise<Game> {
         const response = await client.get(`/games?id=${gameId}`);
-        return response.data[0];
-    }
+        const { info, cheapestPriceEver, deals } = response.data;
+        return {
+          info: {
+            title: info.title,
+            steamAppID: info.steamAppID,
+            thumb: info.thumb
+          },
+          cheapestPriceEver: {
+            price: cheapestPriceEver.price,
+            date: cheapestPriceEver.date
+          },
+          deals: deals.map((deal: any) => ({
+            storeID: deal.storeID,
+            dealID: deal.dealID,
+            price: deal.price,
+            retailPrice: deal.retailPrice,
+            savings: deal.savings
+          }))
+        };
+      }
+
 
     public async getStores(): Promise<GameStore[]> {
         const response = await client.get(`/stores`);
