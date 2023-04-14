@@ -3,7 +3,7 @@
 export interface GameDeal {
     title: string;
     dealID: string;
-    storeID: string;
+    storeID: number;
     gameID: string;
     salePrice: string;
     normalPrice: string;

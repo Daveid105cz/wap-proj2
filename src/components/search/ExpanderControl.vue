@@ -35,6 +35,12 @@ function toggleExpanded() {
     border-radius: 8px 8px 8px 8px;
     gap: 0.5rem;
 }
+.expander-control:hover .header-block {
+    box-shadow: 0px 0px 0px 1px #ccc;
+}
+.expander-control:hover .content-block {
+    box-shadow: 0px 0px 0px 1px #ccc;
+}
 .header-block.expanded{
     border-radius: 8px 8px 0px 0px;
     border-bottom: 1px solid gray;

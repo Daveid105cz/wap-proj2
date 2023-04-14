@@ -12,7 +12,7 @@ interface GroupedDeal {
 };
 
 interface GroupedDealByStore {
-    storeID: string;
+    storeID: number;
     deals: GameDeal[];
 };
 

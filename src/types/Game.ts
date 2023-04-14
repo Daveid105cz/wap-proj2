@@ -9,7 +9,7 @@ export interface Game {
       date: number;
     };
     deals: {
-      storeID: string;
+      storeID: number;
       dealID: string;
       price: string;
       retailPrice: string;

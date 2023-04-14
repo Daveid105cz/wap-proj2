@@ -8,15 +8,15 @@
             <option v-for="sortOption in getSortByWithNames()" :value="sortOption.value">{{ sortOption.name }}</option>
         </select>
         <button @click="searchStore.search()">Search</button>
-        <div v-if="!searchStore.isLoading">
+        <div v-if="!searchStore.isLoading" class="games-list">
             <ExpanderControl v-for="game in searchStore.groupedDeals" :key="game.id">
                 <template #header>
-                    <img :src="game.thumbnail" />
-                    <h2>{{ game.title }}</h2>
+                    <img class="game-thumb" :src="game.thumbnail" />
+                    <h2 class="game-title">{{ game.title }}</h2>
                 </template>
                 <template #content>
-                    <div v-for="deal in game.deals" :key="deal.dealID">
-                        <p>{{ deal.storeID }}</p>
+                    <div class="game-deal" v-for="deal in game.deals" :key="deal.dealID">
+                        <img class="store-thumb" :src="getStoreThumb(deal.storeID)" />
                         <p>{{ deal.normalPrice }}</p>
                         <p>{{ deal.salePrice }}</p>
                     </div>
@@ -53,6 +53,11 @@ const isAlphabetical = computed(() => searchStore.sortBy === SortBy.Title);
 searchStore.loadStores();
 searchStore.search();
 
+function getStoreThumb(storeID: number){
+    const store = searchStore.stores.find(s => s.storeID === storeID);
+    return "https://www.cheapshark.com/"+store?.images.banner;
+}
+
 // modifyFilterByQueryObj(searchStore.filter, query);
 // searchStore.sortOrder = queryObjToSortOrder(query);
 // const storess = await cheapSharkService.getStores()
@@ -60,6 +65,33 @@ searchStore.search();
 </script>
 
 <style scope>
-
-
+.games-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1em;
+}
+.game-header img{
+    width: 4em;
+    height: 4em;
+}
+.game-thumb {
+    width: 8em;
+}
+.game-deal{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    height: 2.4em;
+    border-bottom: 1px solid lightslategray;
+    margin: 0.2em 0;
+}
+.game-deal:last-child{
+    border-bottom: 0px;
+}
+.store-thumb {
+    width: 8em;
+    max-height: 2.2em;
+}
 </style>
