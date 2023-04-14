@@ -68,7 +68,7 @@ function getStoreThumb(storeID: number){
 .games-list {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
     margin-top: 1em;
 }
 .game-header img{
