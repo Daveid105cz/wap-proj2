@@ -16,7 +16,7 @@ export interface SearchFilter{
     upperPrice?: number;
     metacritic?: number;
     steamRating?: number
-    storeId?: number;
+    storeID?: number;
 };
 
 export function modifyFilterByQueryObj(filter: SearchFilter, queryObj: any) {
@@ -30,7 +30,7 @@ export function modifyFilterByQueryObj(filter: SearchFilter, queryObj: any) {
     if (queryObj.steamRating)
         filter.steamRating = Number(queryObj.steamRating);
     if (queryObj.storeId)
-        filter.storeId = queryObj.storeId;
+        filter.storeID = queryObj.storeId;
 }
 export function queryObjToSortOrder(queryObj: any): SortOrder {
     if (queryObj.sortOrder)

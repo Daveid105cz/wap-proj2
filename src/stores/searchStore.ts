@@ -43,7 +43,7 @@ export const useSearchStore = defineStore({
             this.isLoading = true;
             const loadFilter: SearchFilter = {...this.filter};
             if (this.selectedStore)
-                loadFilter.storeId = this.selectedStore;
+                loadFilter.storeID = this.selectedStore;
             const gameDeals = await apiService.getDeals(this.searchQuery,loadFilter, this.sortBy, this.sortOrder, this.page, this.pageSize);
             this.deals = gameDeals;
             this.isLoading = false;
