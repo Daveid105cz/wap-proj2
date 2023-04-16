@@ -1,6 +1,7 @@
 export interface Game {
     info: {
       title: string;
+      gameID: number;
       steamAppID: number;
       thumb: string;
     };

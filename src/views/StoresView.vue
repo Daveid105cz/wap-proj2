@@ -1,6 +1,6 @@
 <template>
     <div class="stores-list">
-        <Spinner class="load-spinner" v-if="!storesStore.isLoading" />
+        <Spinner class="load-spinner" v-if="storesStore.isLoading" />
         <div class="store-block" v-for="store in storesStore.activeStores" :key="store.storeID">
             <RouterLink class="store-info" :to="{name:'search', query: {storeID: store.storeID}}">
                 <div  >
@@ -27,7 +27,7 @@ import Spinner from '@/components/Spinner.vue';
 import { useRouter } from 'vue-router';
 
 const storesStore = useStoresStore();
-storesStore.loadStores();
+// storesStore.loadStores();
 
 
 function getStoreThumb(storeUrl: string){

@@ -4,6 +4,27 @@ import type { GameStore } from "@/types/GameStore";
 import { SortBy, SortOrder, type SearchFilter } from "@/types/SearchFilter";
 import client from "./AxiosClient";
 
+function mapGameObject(info: any, cheapestPriceEver: any, deals: any, gameId: number): Game {
+  return {
+    info: {
+      title: info.title,
+      gameID: gameId,
+      steamAppID: info.steamAppID,
+      thumb: info.thumb
+    },
+    cheapestPriceEver: {
+      price: cheapestPriceEver.price,
+      date: cheapestPriceEver.date
+    },
+    deals: deals.map((deal: any) => ({
+      storeID: deal.storeID,
+      dealID: deal.dealID,
+      price: deal.price,
+      retailPrice: deal.retailPrice,
+      savings: deal.savings
+    }))
+  };
+}
 
 export class CheapSharkService {
     public async getDeals(query: string = "", 
@@ -27,30 +48,24 @@ export class CheapSharkService {
     public async getGame(gameId: string): Promise<Game> {
         const response = await client.get(`/games?id=${gameId}`);
         const { info, cheapestPriceEver, deals } = response.data;
-        return {
-          info: {
-            title: info.title,
-            steamAppID: info.steamAppID,
-            thumb: info.thumb
-          },
-          cheapestPriceEver: {
-            price: cheapestPriceEver.price,
-            date: cheapestPriceEver.date
-          },
-          deals: deals.map((deal: any) => ({
-            storeID: deal.storeID,
-            dealID: deal.dealID,
-            price: deal.price,
-            retailPrice: deal.retailPrice,
-            savings: deal.savings
-          }))
-        };
+        return mapGameObject(info, cheapestPriceEver, deals, Number(gameId));
       }
 
 
     public async getStores(): Promise<GameStore[]> {
         const response = await client.get(`/stores`);
         return response.data;
+    }
+
+    public async getGamesByIds(gameIds: number[]): Promise<Game[]> {
+        const response = await client.get(`/games?ids=${gameIds.join(",")}`);
+        //the response is an object with the game id as the property names
+        //so we need to convert it to an array
+        const games = Object.keys(response.data);
+        return games.map((gameId: string) => {
+            const { info, cheapestPriceEver, deals } = response.data[gameId];
+            return mapGameObject(info, cheapestPriceEver, deals, Number(gameId));
+        });
     }
 }
 
