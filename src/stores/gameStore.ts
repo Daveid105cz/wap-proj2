@@ -4,7 +4,7 @@ import type { GameDeal } from '@/types/GameDeal';
 import type { Game } from '@/types/Game';
 import type { GameStore } from '@/types/GameStore';
 import { SortBy, SortOrder, type SearchFilter } from '@/types/SearchFilter';
-
+import userSettings from '@/services/UserSettings';
 
 interface GroupedDeal {
     id: number;
@@ -23,6 +23,8 @@ export const useGameStore = defineStore({
     state: () => ({
         isLoading: false,
         game: {} as Game,
+        gameId: 0,
+        isWishlisted: false,
         sortBy: SortBy.DealRating,
         sortOrder: SortOrder.Ascending,
         dealsByGame: [] as GameDeal[],
@@ -40,6 +42,8 @@ export const useGameStore = defineStore({
             this.isLoading = true;
             this.game = await apiService.getGame(id);
             this.isLoading = false;
+            this.gameId = Number(id);
+            this.isWishlisted = userSettings.isOnWishlist(this.gameId);
         },
         async fetchDealsByGame() {
             this.isLoading = true;
@@ -47,6 +51,13 @@ export const useGameStore = defineStore({
             this.dealsByGame = dealsByGame;
             this.groupedDealsByGame = this.groupDealsByStore(dealsByGame);
             this.isLoading = false;
+        },
+        toggleWishlist() {
+            this.isWishlisted = !this.isWishlisted;
+            if(this.isWishlisted)
+                userSettings.addToWishlist(this.gameId);
+            else
+                userSettings.removeFromWishlist(this.gameId);
         },
 
         groupDealsByStore(deals: GameDeal[]): GroupedDealByGame[] {

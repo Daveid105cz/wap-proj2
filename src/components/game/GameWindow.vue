@@ -14,6 +14,11 @@
             <p><strong>Steam Rating Count:</strong> {{ groupedDealsByGame[0].deals[0].steamRatingCount }}</p>
             <p><strong>Release Date:</strong> {{ new Date(groupedDealsByGame[0].deals[0].releaseDate * 1000).toLocaleDateString() }}</p>
           </div>
+          <button class="wishlist-icon" :class="{'added':gameStore.isWishlisted}" @click="gameStore.toggleWishlist">
+                <svg width="800px" height="800px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" stroke-width="3" stroke="#000000" fill="none"><path d="M9.06,25C7.68,17.3,12.78,10.63,20.73,10c7-.55,10.47,7.93,11.17,9.55a.13.13,0,0,0,.25,0c3.25-8.91,9.17-9.29,11.25-9.5C49,9.45,56.51,13.78,55,23.87c-2.16,14-23.12,29.81-23.12,29.81S11.79,40.05,9.06,25Z"/></svg>
+                <p v-if="!gameStore.isWishlisted">Add to wishlist</p>
+                <p v-else>Remove from wishlist</p>
+            </button>
         </div>
 
       </div>
@@ -64,7 +69,8 @@ export default defineComponent({
     return {
       isLoading,
       game, 
-      groupedDealsByGame
+      groupedDealsByGame,
+      gameStore
     };
   },
   created() {
@@ -130,7 +136,7 @@ export default defineComponent({
 }
 
 .game-info {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   font-size: 1rem;
 }
 
@@ -157,5 +163,34 @@ export default defineComponent({
 .top-deal-store img {
   width: 200px;
   height: 50px;
+}
+.wishlist-icon{
+    display: flex;
+    flex-direction: row;
+    align-items: center;  
+    cursor: pointer;
+    width: auto;
+    background-color: var(--color-background-mute);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    /* width: 16em; */
+    margin-bottom: 0.5rem;
+}
+.wishlist-icon p{
+    margin: 0;
+    padding: 0.5rem;
+    color: white;
+    font-size: 1rem;
+}
+.wishlist-icon svg{
+    width: 38px;
+    height: 38px;
+    stroke: white;
+}
+.wishlist-icon.added svg{
+    fill: #FF0000;
+}
+.wishlist-icon:hover svg{
+  fill: #FF0000;
 }
 </style>
