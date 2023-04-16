@@ -1,14 +1,14 @@
 <template>
     <div class="stores-list">
-        <div class="store-block" v-for="store in storesStore.stores" :key="store.storeID">
+        <div class="store-block" v-for="store in storesStore.activeStores" :key="store.storeID">
             <div class="store-info">
                 <p>{{ store.storeName }}</p>
                 <img :src="getStoreThumb(store.images.logo)" />
             </div>
             <div class="deals-list">
-                <div class="deal-item" v-for="deal in store.deals" :key="deal.dealID">
+                <div class="deal-item" v-for="deal in store.deals" :key="deal.dealID" @click="redirectToStore(deal.dealID)">
                     <img :src="deal.thumb" />
-                    <p>{{ deal.title }}</p>
+                    <p class="title">{{ deal.title }}</p>
                     <p class="new-price">{{ deal.salePrice }} $</p>
                     <p class="normal-price">{{ deal.normalPrice }} $</p>
 
@@ -22,11 +22,15 @@
 import { useStoresStore } from '@/stores/storesStore';
 
 const storesStore = useStoresStore();
-//storesStore.loadStores();
+storesStore.loadStores();
 
 
 function getStoreThumb(storeUrl: string){
     return "https://www.cheapshark.com/"+storeUrl;
+}
+
+function redirectToStore(dealID: string){
+    window.open("https://www.cheapshark.com/redirect?dealID="+dealID, "_blank");
 }
 </script>
 
@@ -68,12 +72,25 @@ function getStoreThumb(storeUrl: string){
 .deals-list{
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    /* gap: 1rem; */
     width: 100%;
 }
 .deal-item{
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr 6em 6em;
+    /* height: 2.5em; */
+    padding: 1em 0.6em;
+    cursor: pointer;
+    box-sizing: border-box;
+    border-left: 4px solid transparent;
+}
+.deal-item:hover{
+    background-color: var(--color-background-mute);
+    border-left: 4px solid var(--color-heading);
+}
+.deal-item p{
+    margin: 0;
+    font-size: 1.2rem;
 }
 .deal-item img{
     width: 8em;
@@ -81,6 +98,7 @@ function getStoreThumb(storeUrl: string){
     object-fit: cover;
 }
 .normal-price{
+    margin: 0 0.3em 0 0;
     text-decoration: line-through;
     color: gray;
 }
