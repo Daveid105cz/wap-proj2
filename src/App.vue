@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/Header.vue'
 </script>
 
 <template>
@@ -9,11 +10,12 @@ import HelloWorld from './components/HelloWorld.vue'
     <div class="wrapper">
       
 
-    <nav>
+    <!-- <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/search">Search</RouterLink>
-      </nav>
+      </nav> -->
+      <Header></Header>
     </div>
   </header>
 
