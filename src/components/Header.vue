@@ -12,7 +12,7 @@
         <a href="/">Best Game Deals</a>
       </div>
       <nav class="nav-links right">
-        <router-link to="/about">About</router-link>
+        <router-link to="/wishlist">Wishlist</router-link>
 
       </nav>
       <nav class="nav-links right">

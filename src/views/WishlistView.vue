@@ -17,7 +17,7 @@ import Spinner from '@/components/Spinner.vue';
 import {useWishlistStore} from '@/stores/wishlistStore';
 
 const wishlistStore = useWishlistStore();
-// wishlistStore.loadWishlist();
+wishlistStore.loadWishlist();
 
 </script>
 
