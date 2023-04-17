@@ -1,12 +1,20 @@
 <template>
     <div class="sort-order-button my-input" @click="btnClicked">
-        <img class="sort-icon" :class="{ 'asc': isAsc, 'desc': isDesc }" :src="svgSource" />
+        <!-- <img class="sort-icon" :class="{ 'asc': isAsc, 'desc': isDesc }" :src="svgSource" /> -->
+        <IconAscendingAlphabet v-if="isAsc && props.isAlphabetical" class="sort-icon asc" />
+        <IconAscendingNumeric v-if="isAsc && !props.isAlphabetical" class="sort-icon asc" />
+        <IconDescendingAlphabet v-if="!isAsc && props.isAlphabetical" class="sort-icon desc" />
+        <IconDescendingNumeric v-if="!isAsc && !props.isAlphabetical" class="sort-icon desc" />
     </div>
   </template>
   
 <script setup lang="ts">
 import { SortOrder } from '@/types/SearchFilter';
 import { computed } from 'vue';
+import IconAscendingAlphabet from '../icons/IconAscendingAlphabet.vue';
+import IconAscendingNumeric from '../icons/IconAscendingNumeric.vue';
+import IconDescendingAlphabet from '../icons/IconDescendingAlphabet.vue';
+import IconDescendingNumeric from '../icons/IconDescendingNumeric.vue';
 
 const props = defineProps<{
     modelValue: SortOrder;
@@ -14,12 +22,12 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-    (event: 'update:modelValue', payload: number): void;
+    (event: 'update:modelValue', payload: SortOrder): void;
 }>();
 
 const isAsc = computed(() => props.modelValue === SortOrder.Ascending);
-const isDesc = computed(() => props.modelValue === SortOrder.Descending);
-  
+// const isDesc = computed(() => props.modelValue === SortOrder.Descending);
+
 const svgSource = computed(() => {
     let svgSource = "";
     if(props.isAlphabetical) {
@@ -55,6 +63,7 @@ function btnClicked() {
     height: 95%;
     transition: transform 0.3s ease;
     border: 0px;
+    fill: white;
     /* background-color: red; */
 }
 

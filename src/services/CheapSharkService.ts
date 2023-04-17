@@ -32,13 +32,17 @@ export class CheapSharkService {
                 sortOrder?: SortOrder, page: number = 0, 
                 pageSize: number = 60 
             ): Promise<GameDeal[]> {
+        // const sortOrderInvertedIfTitle = (sortBy === SortBy.Title) ? !sortOrder : sortOrder;
+        console.log("Sorting order: "+sortOrder);
+        const descParamater = (sortOrder === SortOrder.Ascending) ? 1 : 0;
+        console.log("Desc parameter: "+descParamater);
         const paramsObject = {
             ...filter,
             title: query,
             sortBy: sortBy,
             pageNumber: page,
             pageSize: pageSize,
-            desc: (sortOrder === SortOrder.Ascending) ? 1 : 0
+            desc: descParamater
         };
 
         const response = await client.get(`/deals`, { params: paramsObject });

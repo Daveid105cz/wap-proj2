@@ -1,15 +1,15 @@
 export enum SortOrder {
-    Ascending = 1,
-    Descending = -1
+    Ascending = "ascending",
+    Descending = "descending"
 };
 export enum SortBy {
-    Title, 
-    DealRating, 
-    Saving, 
-    Price,
-    Metacritic,
-    Store,
-    Recent
+    Title = "Title",
+    DealRating = "DealRating", 
+    Saving = "Savings",
+    Price = "Price",
+    Metacritic = "Metacritic",
+    Store = "Store",
+    Recent = "Recent"
 };
 export interface SearchFilter{
     lowerPrice?: number;

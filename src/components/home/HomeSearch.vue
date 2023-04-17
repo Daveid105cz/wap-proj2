@@ -3,7 +3,7 @@
       <h2>Save up on your game purchase</h2>
       <div class="search-bar">
         <input type="text" placeholder="Search for games...">
-        <button>Search</button>
+        <button class="search-button">Search</button>
       </div>
     </div>
   </template>
@@ -41,19 +41,5 @@
     margin-right: 8px;
   }
   
-  .search-bar button {
-    height: 36px;
-    padding: 8px 16px;
-    font-size: 16px;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-  }
-  
-  .search-bar button:hover {
-    background-color: #0069d9;
-  }
   </style>
   

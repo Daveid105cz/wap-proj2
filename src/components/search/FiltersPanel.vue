@@ -9,7 +9,7 @@
         <NumericInput class="score-input" label="Min. steam rating: " :min-val="0" :max-val="100"
                 v-model.number="searchStore.filter.steamRating" placeholder="Minimal steam rating" />
         <div>
-            <label class="my-label" for="store-select">Store:</label>
+            <label class="my-label" for="store-select">Store: </label>
             <select class="my-input" v-model.number="searchStore.selectedStore">
                 <option :value="null">All</option>
                 <option v-for="store in searchStore.stores" :value="store.storeID">{{ store.storeName }}</option> 
@@ -37,7 +37,8 @@ const searchStore = useSearchStore();
 }
 .filters-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 1rem;
 }
 .score-input{
@@ -47,10 +48,10 @@ const searchStore = useSearchStore();
 /* .score-input input{
     width: 8em;
 } */
-@media (min-width: 1024px) {
+/* @media (min-width: 1024px) {
     .filters-container {
         flex-direction: row;
     }
-}
+} */
 
 </style>

@@ -10,6 +10,8 @@ interface GroupedDeal {
     title: string;
     thumbnail: string;
     deals: GameDeal[];
+    metacritic: number;
+    lastChange: number;
 };
 
 interface Filtering {
@@ -60,6 +62,8 @@ export const useSearchStore = defineStore({
                         id: deal.gameID,
                         title: deal.title,
                         thumbnail: deal.thumb,
+                        metacritic: deal.metacriticScore,
+                        lastChange: deal.lastChange,
                         deals: [deal]
                     });
                 }

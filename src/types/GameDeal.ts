@@ -9,7 +9,7 @@ export interface GameDeal {
     normalPrice: string;
     isOnSale: string;
     savings: string;
-    metacriticScore: string;
+    metacriticScore: number;
     steamRatingText: string;
     steamRatingPercent: string;
     steamRatingCount: string;

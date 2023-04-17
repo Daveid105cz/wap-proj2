@@ -1,18 +1,23 @@
 <template>
     <div class="search">
         <h1>Search</h1>
-        <FiltersPanel />
-        <SortOrderToggle v-model="searchStore.sortOrder" :is-alphabetical="isAlphabetical"/>
+        <FiltersPanel class="filters-panel"/>
+        <div class="sorting-options">
+            <label class="my-label" for="sort-by-select">Sort by:</label>
+            <select class="my-input" v-model.number="searchStore.sortBy">
+                <option v-for="sortOption in getSortByWithNames()" :value="sortOption.value">{{ sortOption.name }}</option>
+            </select>
+            <p class="my-label">Sort order:</p>
+            <SortOrderToggle v-model="searchStore.sortOrder" :is-alphabetical="isAlphabetical"/>
+            <button class="search-button" @click="searchStore.search()">Search</button>
+        </div>
 
-        <select v-model.number="searchStore.sortBy">
-            <option v-for="sortOption in getSortByWithNames()" :value="sortOption.value">{{ sortOption.name }}</option>
-        </select>
-        <button @click="searchStore.search()">Search</button>
         <div v-if="!searchStore.isLoading" class="games-list">
             <ExpanderControl v-for="game in searchStore.groupedDeals" :key="game.id">
                 <template #header>
                     <img class="game-thumb" :src="game.thumbnail" />
                     <h2 class="game-title">{{ game.title }}</h2>
+                    <p> Metacritic: {{  game.metacritic }} %</p>
                 </template>
                 <template #content>
                     <div class="game-deal" v-for="deal in game.deals" :key="deal.dealID">
@@ -93,5 +98,24 @@ function getStoreThumb(storeID: number){
 .store-thumb {
     width: 8em;
     max-height: 2.2em;
+}
+.filters-panel{
+    background-color: var(--color-background-mute);
+    padding: 1em;
+    border-radius: 12px 12px 0 0;
+}
+.sorting-options{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1em;
+    background-color: var(--color-background-mute);
+    padding: 1em;
+}
+.search-button{
+    /**position to right in parent that is flexbox */
+    margin-left: auto;
 }
 </style>
