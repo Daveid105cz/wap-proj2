@@ -32,11 +32,11 @@ export function modifyFilterByQueryObj(filter: SearchFilter, queryObj: any) {
     if (queryObj.storeId)
         filter.storeID = queryObj.storeId;
 }
-export function queryObjToSortOrder(queryObj: any): SortOrder {
-    if (queryObj.sortOrder)
-        return Number(queryObj.sortOrder);
-    return SortOrder.Descending;
-}
+// export function queryObjToSortOrder(queryObj: any): SortOrder {
+//     if (queryObj.sortOrder)
+//         return Number(queryObj.sortOrder);
+//     return SortOrder.Descending;
+// }
 
 export function getSortByWithNames(): { name: string, value: SortBy }[] {
     return [

@@ -11,7 +11,6 @@ interface GroupedDeal {
     thumbnail: string;
     deals: GameDeal[];
     metacritic: number;
-    lastChange: number;
 };
 
 interface Filtering {
@@ -31,7 +30,7 @@ export const useSearchStore = defineStore({
         sortOrder: SortOrder.Ascending,
         deals: [] as GameDeal[],
         page: 0,
-        totalCount: 0,
+        knowPagesCount: 1,
         pageSize: 60,
         selectedStore: null as number | null,
         stores: [] as GameStore[]
@@ -40,8 +39,12 @@ export const useSearchStore = defineStore({
         async loadStores(){
             this.stores = await apiService.getStores();
         },
-        async search() {
-            // this.deals = [];
+        async search(resetPages: boolean = true) {
+            if (resetPages){
+                this.page = 0;
+                this.knowPagesCount = 1;
+            }
+            
             this.isLoading = true;
             const loadFilter: SearchFilter = {...this.filter};
             if (this.selectedStore)
@@ -49,6 +52,20 @@ export const useSearchStore = defineStore({
             const gameDeals = await apiService.getDeals(this.searchQuery,loadFilter, this.sortBy, this.sortOrder, this.page, this.pageSize);
             this.deals = gameDeals;
             this.isLoading = false;
+        },
+        async goNextPage(){
+            console.log("Going to next page");
+            this.page++;
+            await this.search(false);
+            if(this.deals.length !== 0)
+                this.knowPagesCount = this.page+1;
+        },
+        async goPage(page: number){
+            console.log("Going to page: "+page);
+            if(page < 0 || page >= this.knowPagesCount)
+                return;
+            this.page = page;
+            await this.search(false);
         }
     },
     getters: {
@@ -63,7 +80,6 @@ export const useSearchStore = defineStore({
                         title: deal.title,
                         thumbnail: deal.thumb,
                         metacritic: deal.metacriticScore,
-                        lastChange: deal.lastChange,
                         deals: [deal]
                     });
                 }

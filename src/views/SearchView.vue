@@ -17,7 +17,6 @@
                 <template #header>
                     <img class="game-thumb" :src="game.thumbnail" />
                     <h2 class="game-title">{{ game.title }}</h2>
-                    <p> Metacritic: {{  game.metacritic }} %</p>
                 </template>
                 <template #content>
                     <div class="game-deal" v-for="deal in game.deals" :key="deal.dealID">
@@ -29,7 +28,14 @@
             </ExpanderControl>
         </div>
         
-        <Spinner v-if="searchStore.isLoading" />
+        <Spinner class="load-spinner" v-if="searchStore.isLoading" />
+        <div class="search-bottom">
+            <label class="my-label">Showing {{ searchStore.deals.length }} deals</label>
+            <Paginator :current-page="searchStore.page" :total-pages="searchStore.knowPagesCount" 
+            v-on:next-page="searchStore.goNextPage"
+            v-on:page-changed="searchStore.goPage"
+            />
+        </div>
     </div>
 
 </template>
@@ -44,7 +50,7 @@ import Spinner from '@/components/Spinner.vue';
 import SortOrderToggle from '@/components/inputs/SortOrderToggle.vue';
 import { computed } from 'vue';
 import ExpanderControl from '@/components/search/ExpanderControl.vue';
-
+import Paginator from '@/components/search/Paginator.vue';
 
 const currentRoute = useRoute();
 const query = currentRoute.query;
@@ -115,7 +121,16 @@ function getStoreThumb(storeID: number){
     padding: 1em;
 }
 .search-button{
-    /**position to right in parent that is flexbox */
     margin-left: auto;
+}
+.search-bottom{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+    margin-top: 1em;
+    gap: 1rem;
+    background-color: var(--color-background-mute);
+    border-radius: 0 0 12px 12px;
 }
 </style>
