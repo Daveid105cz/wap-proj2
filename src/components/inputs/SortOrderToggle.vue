@@ -1,6 +1,5 @@
 <template>
     <div class="sort-order-button my-input" @click="btnClicked">
-        <!-- <img class="sort-icon" :class="{ 'asc': isAsc, 'desc': isDesc }" :src="svgSource" /> -->
         <IconAscendingAlphabet v-if="isAsc && props.isAlphabetical" class="sort-icon asc" />
         <IconAscendingNumeric v-if="isAsc && !props.isAlphabetical" class="sort-icon asc" />
         <IconDescendingAlphabet v-if="!isAsc && props.isAlphabetical" class="sort-icon desc" />
@@ -26,18 +25,6 @@ const emit = defineEmits<{
 }>();
 
 const isAsc = computed(() => props.modelValue === SortOrder.Ascending);
-// const isDesc = computed(() => props.modelValue === SortOrder.Descending);
-
-const svgSource = computed(() => {
-    let svgSource = "";
-    if(props.isAlphabetical) {
-        svgSource = (isAsc.value) ? "ascAlphabet":"descAlphabet";
-    } else {
-        svgSource =  (isAsc.value) ? "ascNumeric":"descNumeric";
-    }
-    console.log(svgSource);
-    return new URL("../../assets/sortIcons/"+svgSource+".svg", import.meta.url).href;
-});
 
 function btnClicked() {
     if (props.modelValue === SortOrder.Ascending) {
