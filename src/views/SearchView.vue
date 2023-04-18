@@ -11,7 +11,12 @@
             <SortOrderToggle v-model="searchStore.sortOrder" :is-alphabetical="isAlphabetical"/>
             <button class="search-button" @click="searchStore.search()">Search</button>
         </div>
-
+        <div class="deals-header">
+            <p>Store</p>
+            <p>New price</p>
+            <p>Normal price</p>
+            <p>Deal rating</p>
+        </div>
         <div v-if="!searchStore.isLoading" class="games-list">
             <ExpanderControl v-for="game in searchStore.groupedDeals" :key="game.id">
                 <template #header>
@@ -21,8 +26,9 @@
                 <template #content>
                     <div class="game-deal" v-for="deal in game.deals" :key="deal.dealID">
                         <img class="store-thumb" :src="getStoreThumb(deal.storeID)" />
-                        <p>{{ deal.normalPrice }}</p>
-                        <p>{{ deal.salePrice }}</p>
+                        <p class="new-price">{{ deal.salePrice }} $</p>
+                        <p class="normal-price">{{ deal.normalPrice }} $</p>
+                        <p>{{ deal.dealRating }}</p>
                     </div>
                 </template>
             </ExpanderControl>
@@ -76,6 +82,21 @@ function getStoreThumb(storeID: number){
 </script>
 
 <style scope>
+.deals-header{
+    display: grid;
+    grid-template-columns: 8em 8em 8em 8em;
+    align-items: center;
+    margin-bottom: 1em;
+    gap: 1rem;
+    padding: 0.5rem;
+    background-color: var(--color-background-mute);
+    border-top: 4px solid var(--color-background);
+}
+.deals-header p{
+    font-size: 1.2em;
+    color: white;
+    font-weight: 600;
+}
 .games-list {
     display: flex;
     flex-direction: column;
@@ -90,9 +111,9 @@ function getStoreThumb(storeID: number){
     width: 8em;
 }
 .game-deal{
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
+    gap: 1rem; 
+    display: grid;
+    grid-template-columns: 8em 8em 8em 8em;
     align-items: center;
     height: 2.4em;
     border-bottom: 1px solid lightslategray;
@@ -116,7 +137,6 @@ function getStoreThumb(storeID: number){
     flex-wrap: wrap;
     gap: 1rem;
     align-items: center;
-    margin-bottom: 1em;
     background-color: var(--color-background-mute);
     padding: 1em;
 }

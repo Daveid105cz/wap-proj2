@@ -107,3 +107,12 @@ body {
 .search-button:hover {
     background-color: #0069d9;
 }
+
+.normal-price{
+    margin: 0 0.3em 0 0;
+    text-decoration: line-through;
+    color: gray;
+}
+.new-price{
+    color: green
+}

@@ -4,7 +4,7 @@ export enum SortOrder {
 };
 export enum SortBy {
     Title = "Title",
-    DealRating = "DealRating", 
+    DealRating = "Deal Rating", 
     Saving = "Savings",
     Price = "Price",
     Metacritic = "Metacritic",

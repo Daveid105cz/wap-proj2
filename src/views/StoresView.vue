@@ -118,14 +118,6 @@ function getStoreThumb(storeUrl: string){
     max-height: 2.2em;
     object-fit: cover;
 }
-.normal-price{
-    margin: 0 0.3em 0 0;
-    text-decoration: line-through;
-    color: gray;
-}
-.new-price{
-    color: green
-}
 
 
 .store-info:hover::after{
