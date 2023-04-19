@@ -37,6 +37,8 @@ export const useSearchStore = defineStore({
     }),
     actions: {
         async loadStores(){
+            if (this.stores.length > 0)
+                return;
             this.stores = await apiService.getStores();
         },
         async search(resetPages: boolean = true) {

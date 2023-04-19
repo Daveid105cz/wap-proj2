@@ -94,10 +94,7 @@ function commitSearch(){
         query: searchStore.urlQuery
     });
 }
-// modifyFilterByQueryObj(searchStore.filter, query);
-// searchStore.sortOrder = queryObjToSortOrder(query);
-// const storess = await cheapSharkService.getStores()
-// console.log(storess);   
+
 </script>
 
 <style scope>
