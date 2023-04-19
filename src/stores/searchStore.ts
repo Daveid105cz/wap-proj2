@@ -2,7 +2,7 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import apiService from '../services/CheapSharkService'
 import type { GameDeal } from '@/types/GameDeal';
-import { SortBy, SortOrder, type SearchFilter } from '@/types/SearchFilter';
+import { buildQueryParamsFromAllFilters, SortBy, SortOrder, type SearchFilter } from '@/types/SearchFilter';
 import type { GameStore } from '@/types/GameStore';
 
 interface GroupedDeal {
@@ -27,7 +27,7 @@ export const useSearchStore = defineStore({
         searchQuery: "" as string,
         filter: { lowerPrice:0, upperPrice: 50, metacritic:0, steamRating: 0 } as Filtering,
         sortBy: SortBy.DealRating,
-        sortOrder: SortOrder.Ascending,
+        sortOrder: SortOrder.Descending,
         deals: [] as GameDeal[],
         page: 0,
         knowPagesCount: 1,
@@ -66,6 +66,10 @@ export const useSearchStore = defineStore({
                 return;
             this.page = page;
             await this.search(false);
+        },
+        setPage(page: number){
+            this.page = page;
+            this.knowPagesCount = page+1;
         }
     },
     getters: {
@@ -85,6 +89,9 @@ export const useSearchStore = defineStore({
                 }
                 return acc;
             }, []);
+        },
+        urlQuery(): any {
+            return buildQueryParamsFromAllFilters(this.searchQuery, this.filter, this.sortBy, this.sortOrder, this.page, this.selectedStore);
         }
     }
 });

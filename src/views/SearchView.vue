@@ -9,7 +9,7 @@
             </select>
             <p class="my-label">Sort order:</p>
             <SortOrderToggle v-model="searchStore.sortOrder" :is-alphabetical="isAlphabetical"/>
-            <button class="search-button" @click="searchStore.search()">Search</button>
+            <button class="search-button" @click="commitSearch">Search</button>
         </div>
         <div class="deals-header">
             <p>Store</p>
@@ -48,33 +48,52 @@
 
 <script setup lang="ts">
 import { useSearchStore } from '@/stores/searchStore';
-import { getSortByWithNames, SortBy} from '@/types/SearchFilter';
-import { useRoute } from 'vue-router';
+import { getSortByFromQueryObj, getSortByWithNames, getSortOrderFromQueryObj, modifyFilterByQueryObj, SortBy} from '@/types/SearchFilter';
+import { useRoute, useRouter } from 'vue-router';
 import FiltersPanel from '@/components/search/FiltersPanel.vue';
 
 import Spinner from '@/components/Spinner.vue';
 import SortOrderToggle from '@/components/inputs/SortOrderToggle.vue';
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
 import ExpanderControl from '@/components/search/ExpanderControl.vue';
 import Paginator from '@/components/search/Paginator.vue';
+
 
 const currentRoute = useRoute();
 const query = currentRoute.query;
 
 const searchStore = useSearchStore();
 searchStore.searchQuery = query.title as string;
-
-const isAlphabetical = computed(() => searchStore.sortBy === SortBy.Title);
-
-
+modifyFilterByQueryObj(searchStore.filter, query);
+if(query.sortBy){
+    searchStore.sortBy = getSortByFromQueryObj(query);
+}
+if(query.sortOrder){
+    searchStore.sortOrder = getSortOrderFromQueryObj(query);
+}
+if(query.page){
+    searchStore.setPage(parseInt(query.page as string));
+}
 searchStore.loadStores();
-searchStore.search();
+searchStore.search(false);
 
 function getStoreThumb(storeID: number){
     const store = searchStore.stores.find(s => s.storeID === storeID);
     return "https://www.cheapshark.com/"+store?.images.banner;
 }
+const isAlphabetical = computed(() => searchStore.sortBy === SortBy.Title);
 
+const router = useRouter();
+function commitSearch(){
+    searchStore.search(true);
+    console.log("changing the url");
+    const query = searchStore.urlQuery;
+    console.log(query);
+    router.push({
+        path: '/search',
+        query: searchStore.urlQuery
+    });
+}
 // modifyFilterByQueryObj(searchStore.filter, query);
 // searchStore.sortOrder = queryObjToSortOrder(query);
 // const storess = await cheapSharkService.getStores()
