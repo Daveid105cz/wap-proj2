@@ -1,5 +1,5 @@
 
-//TODO: fix the types of the properties
+
 export interface GameDeal {
     title: string;
     dealID: number;

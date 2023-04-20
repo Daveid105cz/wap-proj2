@@ -18,21 +18,10 @@
             <p>Deal rating</p>
         </div>
         <div v-if="!searchStore.isLoading" class="games-list">
-            <!-- <GameGroupControl v-for="game in searchStore.groupedDeals" :key="game.id">
-                <template #header>
-                    <img class="game-thumb" :src="game.thumbnail" />
-                    <h2 class="game-title">{{ game.title }}</h2>
-                </template>
-                <template #content>
-                    <div class="game-deal" v-for="deal in game.deals" :key="deal.dealID">
-                        <img class="store-thumb" :src="getStoreThumb(deal.storeID)" />
-                        <p class="new-price">{{ deal.salePrice }} $</p>
-                        <p class="normal-price">{{ deal.normalPrice }} $</p>
-                        <p>{{ deal.dealRating }}</p>
-                    </div>
-                </template>
-            </GameGroupControl> -->
-            <GameGroupControl v-for="game in searchStore.groupedDeals" :key="game.id" :game="game"/>
+            <GroupedDealsListBlock :isVertical="true"
+                v-for="game in searchStore.groupedDeals" :key="game.id" :deals="game.deals" 
+                :title="game.title" :thumbnailSrc="game.thumbnail" :get-deal-item-link="getStoreThumb"
+                :headerNavigationLink="'/game/'+game.id" :headerNavigationQuery="{}" :show-spinner="false" />
         </div>
         
         <Spinner class="load-spinner" v-if="searchStore.isLoading" />
@@ -56,8 +45,9 @@ import FiltersPanel from '@/components/search/FiltersPanel.vue';
 import Spinner from '@/components/Spinner.vue';
 import SortOrderToggle from '@/components/inputs/SortOrderToggle.vue';
 import { computed, watch } from 'vue';
-import GameGroupControl from '@/components/search/GameGroupControl.vue';
+import GroupedDealsListBlock from '@/components/GroupedDealsListBlock.vue';
 import Paginator from '@/components/search/Paginator.vue';
+import type { GameDeal } from '@/types/GameDeal';
 
 
 const currentRoute = useRoute();
@@ -92,6 +82,11 @@ function commitSearch(){
     });
 }
 
+
+function getStoreThumb(deal: GameDeal){
+    const store = searchStore.stores.find(s => s.storeID === deal.storeID);
+    return "https://www.cheapshark.com/"+store?.images.banner;
+}
 
 </script>
 

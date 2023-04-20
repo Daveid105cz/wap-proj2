@@ -41,8 +41,8 @@ export function modifyFilterByQueryObj(filter: SearchFilter, queryObj: any) {
     else
         filter.steamRating = 0;
     
-    if (queryObj.storeId)
-        filter.storeID = queryObj.storeId;
+    if (queryObj.storeID)
+        filter.storeID = queryObj.storeID;
     else
         filter.storeID = null;
 }
@@ -87,7 +87,7 @@ export function buildQueryParamsFromAllFilters(searchQuery: string, filter: Sear
         queryParams.page = page;
 
     if (filter.storeID && filter.storeID !==null)
-        queryParams.storeId = filter.storeID;
+        queryParams.storeID = filter.storeID;
     
     return queryParams;
 }
