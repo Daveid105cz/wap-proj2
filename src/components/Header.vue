@@ -77,13 +77,13 @@
     color: #333;
   }
   
-  .nav-links router-link {
+  .nav-links a {
     margin-right: 16px;
     text-decoration: none;
     color: #333;
   }
   
-  .nav-links router-link.active {
+  .nav-links a.active {
     font-weight: bold;
   }
   </style>
