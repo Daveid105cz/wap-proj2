@@ -10,7 +10,7 @@
                 v-model.number="searchStore.filter.steamRating" placeholder="Minimal steam rating" />
         <div>
             <label class="my-label" for="store-select">Store: </label>
-            <select class="my-input" v-model.number="searchStore.selectedStore">
+            <select class="my-input" v-model.number="searchStore.filter.storeID">
                 <option :value="null">All</option>
                 <option v-for="store in searchStore.stores" :value="store.storeID">{{ store.storeName }}</option> 
             </select>

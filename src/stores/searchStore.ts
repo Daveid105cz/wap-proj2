@@ -13,11 +13,12 @@ interface GroupedDeal {
     metacritic: number;
 };
 
-interface Filtering {
+interface Filtering extends SearchFilter{
     lowerPrice: number;
     upperPrice: number;
     metacritic: number;
-    steamRating: number
+    steamRating: number;
+    storeID: number | null;
 }
 
 export const useSearchStore = defineStore({
@@ -25,14 +26,14 @@ export const useSearchStore = defineStore({
     state: () => ({
         isLoading: false,
         searchQuery: "" as string,
-        filter: { lowerPrice:0, upperPrice: 50, metacritic:0, steamRating: 0 } as Filtering,
+        filter: { lowerPrice:0, upperPrice: 50, metacritic:0, steamRating: 0, storeID: null} as Filtering,
         sortBy: SortBy.DealRating,
         sortOrder: SortOrder.Descending,
         deals: [] as GameDeal[],
         page: 0,
         knowPagesCount: 1,
         pageSize: 60,
-        selectedStore: null as number | null,
+        // selectedStore: null as number | null,
         stores: [] as GameStore[]
     }),
     actions: {
@@ -48,10 +49,10 @@ export const useSearchStore = defineStore({
             }
             
             this.isLoading = true;
-            const loadFilter: SearchFilter = {...this.filter};
-            if (this.selectedStore)
-                loadFilter.storeID = this.selectedStore;
-            const gameDeals = await apiService.getDeals(this.searchQuery,loadFilter, this.sortBy, this.sortOrder, this.page, this.pageSize);
+            // const loadFilter: SearchFilter = {...this.filter};
+            // if (this.selectedStore)
+            //     loadFilter.storeID = this.selectedStore;
+            const gameDeals = await apiService.getDeals(this.searchQuery,this.filter, this.sortBy, this.sortOrder, this.page, this.pageSize);
             this.deals = gameDeals;
             this.isLoading = false;
         },
@@ -93,7 +94,7 @@ export const useSearchStore = defineStore({
             }, []);
         },
         urlQuery(): any {
-            return buildQueryParamsFromAllFilters(this.searchQuery, this.filter, this.sortBy, this.sortOrder, this.page, this.selectedStore);
+            return buildQueryParamsFromAllFilters(this.searchQuery, this.filter, this.sortBy, this.sortOrder, this.page);
         }
     }
 });

@@ -16,21 +16,35 @@ export interface SearchFilter{
     upperPrice?: number;
     metacritic?: number;
     steamRating?: number
-    storeID?: number;
+    storeID?: number | null;
 };
 
 export function modifyFilterByQueryObj(filter: SearchFilter, queryObj: any) {
     // const filter: SearchFilter = {};
     if (queryObj.lowerPrice)
         filter.lowerPrice = Number(queryObj.lowerPrice);
+    else
+        filter.lowerPrice = 0;
+
     if (queryObj.upperPrice)
         filter.upperPrice = Number(queryObj.upperPrice);
+    else
+        filter.upperPrice = 50;
+
     if (queryObj.metacritic)
         filter.metacritic = Number(queryObj.metacritic);
+    else
+        filter.metacritic = 0;
+
     if (queryObj.steamRating)
         filter.steamRating = Number(queryObj.steamRating);
+    else
+        filter.steamRating = 0;
+    
     if (queryObj.storeId)
         filter.storeID = queryObj.storeId;
+    else
+        filter.storeID = null;
 }
 export function getSortByFromQueryObj(queryObj: any): SortBy {
     if (queryObj.sortBy){
@@ -50,8 +64,7 @@ export function getSortOrderFromQueryObj(queryObj: any): SortOrder {
 
 export function buildQueryParamsFromAllFilters(searchQuery: string, filter: SearchFilter, 
         sortBy: SortBy, sortOrder: SortOrder, 
-        page: number,
-        selectedStore: number | null) {
+        page: number) {
 
     const queryParams: any = {};
 
@@ -65,14 +78,17 @@ export function buildQueryParamsFromAllFilters(searchQuery: string, filter: Sear
         queryParams.metacritic = filter.metacritic;
     if (filter.steamRating && filter.steamRating > 0)
         queryParams.steamRating = filter.steamRating;
-    if (selectedStore && selectedStore !== null)
-        queryParams.storeId = selectedStore;
+
     if (sortBy && sortBy !== SortBy.DealRating)
         queryParams.sortBy = sortBy;
     if (sortOrder && sortOrder !== SortOrder.Descending)
         queryParams.sortOrder = sortOrder;
     if (page && page > 0)
         queryParams.page = page;
+
+    if (filter.storeID && filter.storeID !==null)
+        queryParams.storeId = filter.storeID;
+    
     return queryParams;
 }
 

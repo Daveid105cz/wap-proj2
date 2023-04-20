@@ -2,17 +2,24 @@
     <div class="game-search">
       <h2>Save up on your game purchase</h2>
       <div class="search-bar">
-        <input type="text" placeholder="Search for games...">
-        <button class="search-button">Search</button>
+        <input ref="searchQuery" type="text" placeholder="Search for games...">
+        <button class="search-button" @click="doSearch">Search</button>
       </div>
     </div>
   </template>
   
-  <script lang="ts">
-  export default {
-    name: 'GameSearch',
-  };
-  </script>
+<script setup lang="ts">
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+const router = useRouter();
+const searchQuery = ref<HTMLInputElement|null>(null);
+function doSearch() {
+    if (searchQuery.value && searchQuery.value.value) {
+        router.push({ name: "search", query: { title: searchQuery.value.value } });
+    }
+}
+
+</script>
   
   <style scoped>
   .game-search {
