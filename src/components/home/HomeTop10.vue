@@ -195,6 +195,8 @@ export default defineComponent({
   margin: 8px;
   font-size: 20px;
   text-align: center;
+  color: white;
+  font-weight: bold;
 }
 
 .store-details {

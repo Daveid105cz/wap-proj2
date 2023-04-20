@@ -125,6 +125,7 @@
   margin: 0;
   font-size: 15px;
   font-weight: bold;
+  color: white;
 }
 
 .top-deal-price {
