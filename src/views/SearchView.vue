@@ -13,9 +13,9 @@
         </div>
         <div class="deals-header">
             <p>Store</p>
+            <p>Game title</p>
             <p>New price</p>
             <p>Normal price</p>
-            <p>Deal rating</p>
         </div>
         <div v-if="!searchStore.isLoading" class="games-list">
             <GroupedDealsListBlock :isVertical="true"
@@ -93,7 +93,7 @@ function getStoreThumb(deal: GameDeal){
 <style scope>
 .deals-header{
     display: grid;
-    grid-template-columns: 8em 8em 8em 8em;
+    grid-template-columns: 9em 2fr 6em 6em;
     align-items: center;
     margin-bottom: 1em;
     gap: 1rem;
