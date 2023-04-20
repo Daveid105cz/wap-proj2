@@ -27,7 +27,7 @@ import Spinner from '@/components/Spinner.vue';
 import { useRouter } from 'vue-router';
 
 const storesStore = useStoresStore();
-// storesStore.loadStores();
+storesStore.loadStores();
 
 
 function getStoreThumb(storeUrl: string){

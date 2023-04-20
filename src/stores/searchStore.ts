@@ -5,7 +5,7 @@ import type { GameDeal } from '@/types/GameDeal';
 import { buildQueryParamsFromAllFilters, SortBy, SortOrder, type SearchFilter } from '@/types/SearchFilter';
 import type { GameStore } from '@/types/GameStore';
 
-interface GroupedDeal {
+export interface GroupedDeal {
     id: number;
     title: string;
     thumbnail: string;

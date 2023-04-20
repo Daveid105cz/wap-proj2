@@ -18,7 +18,7 @@
             <p>Deal rating</p>
         </div>
         <div v-if="!searchStore.isLoading" class="games-list">
-            <ExpanderControl v-for="game in searchStore.groupedDeals" :key="game.id">
+            <!-- <GameGroupControl v-for="game in searchStore.groupedDeals" :key="game.id">
                 <template #header>
                     <img class="game-thumb" :src="game.thumbnail" />
                     <h2 class="game-title">{{ game.title }}</h2>
@@ -31,7 +31,8 @@
                         <p>{{ deal.dealRating }}</p>
                     </div>
                 </template>
-            </ExpanderControl>
+            </GameGroupControl> -->
+            <GameGroupControl v-for="game in searchStore.groupedDeals" :key="game.id" :game="game"/>
         </div>
         
         <Spinner class="load-spinner" v-if="searchStore.isLoading" />
@@ -55,7 +56,7 @@ import FiltersPanel from '@/components/search/FiltersPanel.vue';
 import Spinner from '@/components/Spinner.vue';
 import SortOrderToggle from '@/components/inputs/SortOrderToggle.vue';
 import { computed, watch } from 'vue';
-import ExpanderControl from '@/components/search/ExpanderControl.vue';
+import GameGroupControl from '@/components/search/GameGroupControl.vue';
 import Paginator from '@/components/search/Paginator.vue';
 
 
@@ -77,10 +78,6 @@ if(query.page){
 searchStore.loadStores();
 searchStore.search(false);
 
-function getStoreThumb(storeID: number){
-    const store = searchStore.stores.find(s => s.storeID === storeID);
-    return "https://www.cheapshark.com/"+store?.images.banner;
-}
 const isAlphabetical = computed(() => searchStore.sortBy === SortBy.Title);
 
 const router = useRouter();
@@ -120,29 +117,7 @@ function commitSearch(){
     gap: 1rem;
     margin-top: 1em;
 }
-.game-header img{
-    width: 4em;
-    height: 4em;
-}
-.game-thumb {
-    width: 8em;
-}
-.game-deal{
-    gap: 1rem; 
-    display: grid;
-    grid-template-columns: 8em 8em 8em 8em;
-    align-items: center;
-    height: 2.4em;
-    border-bottom: 1px solid lightslategray;
-    margin: 0.2em 0;
-}
-.game-deal:last-child{
-    border-bottom: 0px;
-}
-.store-thumb {
-    width: 8em;
-    max-height: 2.2em;
-}
+
 .filters-panel{
     background-color: var(--color-background-mute);
     padding: 1em;
