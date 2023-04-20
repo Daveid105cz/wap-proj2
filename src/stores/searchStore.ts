@@ -33,7 +33,6 @@ export const useSearchStore = defineStore({
         page: 0,
         knowPagesCount: 1,
         pageSize: 60,
-        // selectedStore: null as number | null,
         stores: [] as GameStore[]
     }),
     actions: {
@@ -49,9 +48,6 @@ export const useSearchStore = defineStore({
             }
             
             this.isLoading = true;
-            // const loadFilter: SearchFilter = {...this.filter};
-            // if (this.selectedStore)
-            //     loadFilter.storeID = this.selectedStore;
             const gameDeals = await apiService.getDeals(this.searchQuery,this.filter, this.sortBy, this.sortOrder, this.page, this.pageSize);
             this.deals = gameDeals;
             this.isLoading = false;

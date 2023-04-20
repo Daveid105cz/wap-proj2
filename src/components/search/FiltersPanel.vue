@@ -24,7 +24,6 @@ import NumericInput from '@/components/inputs/NumericInput.vue';
 
 const searchStore = useSearchStore();
 
-
 </script>
 
 <style>
@@ -42,16 +41,7 @@ const searchStore = useSearchStore();
     gap: 1rem;
 }
 .score-input{
-    /* min-width: 18em; */
     max-height: 4em;
 }
-/* .score-input input{
-    width: 8em;
-} */
-/* @media (min-width: 1024px) {
-    .filters-container {
-        flex-direction: row;
-    }
-} */
 
 </style>
