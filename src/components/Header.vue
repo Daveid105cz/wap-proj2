@@ -1,21 +1,21 @@
 <template>
     <div class="header">
-      <nav class="nav-links left">
+      <nav class="nav-links-left">
         <router-link to="/">Home</router-link>
 
       </nav>
-      <nav class="nav-links left">
+      <nav class="nav-links-left">
 
         <router-link to="/stores">Stores</router-link>
       </nav>
       <div class="logo">
         <a href="/">Best Game Deals</a>
       </div>
-      <nav class="nav-links right">
+      <nav class="nav-links-right">
         <router-link to="/wishlist">Wishlist</router-link>
 
       </nav>
-      <nav class="nav-links right">
+      <nav class="nav-links-right">
 
         <router-link to="/contact">Contact</router-link>
       </nav>
@@ -41,6 +41,8 @@
   .logo {
     flex-grow: 1;
     text-align: center;
+    font-family: "KdamThmorPro-Regular";
+
   }
   
   .logo a {
@@ -50,20 +52,29 @@
     color: #333;
   }
   
-  .nav-links.left {
+  .nav-links-left {
     display: flex;
     font-size: 25px;
     margin-left: 30px;
     margin-right: 30px;
     justify-content: flex-start;
+    color: #333;
+  }
+
+  .nav-links-left a {
+    color: #333;
   }
   
-  .nav-links.right {
+  .nav-links-right {
     display: flex;
     font-size: 25px;
     margin-left: 30px;
     margin-right: 30px;
     justify-content: flex-end;
+  }
+
+  .nav-links-right a {
+    color: #333;
   }
   
   .nav-links router-link {

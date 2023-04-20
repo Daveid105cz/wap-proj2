@@ -87,10 +87,11 @@ export default defineComponent({
 
 <style scoped>
 .top10Text {
-  font-size: 50px;
+  font-size: 80px;
   text-align: center;
   margin-bottom: 50px;
   margin-top: 50px;
+  font-family: "Mogra-Regular";
 }
 
 
@@ -98,30 +99,30 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   
-}
-.top-deal-store {
-  width: 212px;
-  height: 50px;
-  margin-top: 10px;
+  
   
 }
-
-.top-deal-store img {
-  max-width: 100%;
-  max-height: 100%;
+.top-deal-store {
+  width: 210px;
+  height: 50px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
 }
-
+.top-deal-store img {
+  max-width: 50%;
+  max-height: 50%;
+}
 .top-deals-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-auto-rows: minmax(300px, auto);
+  grid-auto-rows: minmax(0px, auto);
   grid-gap: 5px;
-  
-  
 }
 
 .top-deal {
   position: relative;
+  
   
 }
 
@@ -149,12 +150,13 @@ export default defineComponent({
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 20px;
+  padding: 2px;
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  
 }
 
 .top-deal-image {
@@ -192,8 +194,8 @@ export default defineComponent({
 }
 
 .top-deal-title {
-  margin: 8px;
-  font-size: 20px;
+  margin: 1px;
+  font-size: 18px;
   text-align: center;
   color: white;
   font-weight: bold;

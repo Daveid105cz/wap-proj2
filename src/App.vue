@@ -4,6 +4,7 @@ import Header from './components/Header.vue'
 </script>
 
 <template>
+  <div id="app">
   <header>
 
     <div class="wrapper">
@@ -19,6 +20,7 @@ import Header from './components/Header.vue'
   </header>
 
   <RouterView />
+</div>
 </template>
 
 <style scoped>
@@ -83,4 +85,27 @@ nav a:first-of-type {
     margin-top: 1rem;
   }
 } */
+
+
+@font-face {
+  font-family: "Condiment-Regular";
+  src: local("Condiment-Regular"),   url(./assets/fonts/Condiment-Regular.ttf) format("truetype");}
+
+@font-face {
+  font-family: "Mogra-Regular";
+  src: local("Mogra-Regular"),   url(./assets/fonts/Mogra-Regular.ttf) format("truetype");}
+
+  @font-face {
+  font-family: "KdamThmorPro-Regular";
+  src: local("KdamThmorPro-Regular"),   url(./assets/fonts/KdamThmorPro-Regular.ttf) format("truetype");}
+
+/*
+  #app {
+    background-image: url('@/./assets/vecteezy_abstract-modern-graphic-element-dynamical-colored-forms-and_19616310.svg'); 
+    height: 100%;
+    width: 100%;
+    background-size: contain;
+    background-size: cover;
+  } */
+
 </style>

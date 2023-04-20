@@ -138,6 +138,7 @@ export default defineComponent({
 .game-info {
   margin-bottom: 1.5rem;
   font-size: 1rem;
+  
 }
 
 .stores-grid {

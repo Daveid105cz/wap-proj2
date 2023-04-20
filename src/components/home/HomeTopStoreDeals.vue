@@ -83,31 +83,37 @@
   font-size: 50px;
   margin-bottom: 50px;
   margin-top: 50px;
+  font-family: "Mogra-Regular";
+  padding: 30px;
 }
 
 .top-deal-store {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 15px;
-    margin-bottom: 15px;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  width: 320px;
+}
+
 .deals-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 50px;
-  width: 400px;
+  width: 100%;
+  max-width: 800px;
   margin: 0 auto;
 }
 
 .top-deals-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(200px, 1fr)); /* add this line */
+  grid-template-columns: repeat(3, minmax(200px, 1fr));
   grid-template-rows: repeat(2, 1fr);
   gap: 50px;
+  justify-items: center;
 }
-
-
 
 .deal-item {
   display: grid;
