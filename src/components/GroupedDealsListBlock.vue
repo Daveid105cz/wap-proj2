@@ -9,6 +9,7 @@
             <a class="deal-item" v-for="deal in deals" :key="deal.dealID" :href="'https://www.cheapshark.com/redirect?dealID='+deal.dealID" target="_blank">
                 <img :src="getDealItemLink(deal)" />
                 <p v-if="!isVertical" class="title">{{ deal.title }}</p>
+                <p class="deal-rating">{{ deal.dealRating }}</p>
                 <p class="new-price">{{ deal.salePrice }} $</p>
                 <p class="normal-price">{{ deal.normalPrice }} $</p>
             </a>
@@ -98,7 +99,7 @@ const props = defineProps<{
 
 .deal-item{
     display: grid;
-    grid-template-columns: 9em 2fr 6em 6em;
+    grid-template-columns: 9em 2fr 6em 6em 6em;
     padding: 1em 0.6em;
     cursor: pointer;
     box-sizing: border-box;
@@ -143,15 +144,19 @@ const props = defineProps<{
     bottom: 0;
     color: var(--color-heading);
 }
+.deal-rating{
+    grid-column: 3;
+    color: var(--color-text);
+}
 .normal-price{
     /* margin: 0 0.3em 0 0; */
     text-decoration: line-through;
     color: gray;
-    grid-column: 4;
+    grid-column: 5;
 }
 .new-price{
     color: green;
-    grid-column: 3;
+    grid-column: 4;
 }
 
 .load-spinner{
