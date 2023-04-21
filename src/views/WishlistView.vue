@@ -4,29 +4,28 @@
     <div class="wish-list-title"> Wishlist </div>
     <div class="wish-list">
       <Spinner class="load-spinner" v-if="wishlistStore.isLoading" />
-      <router-link
-        v-for="wishlistItem in wishlistStore.wishlist"
-        :to="'/games/' + wishlistItem.gameId"
-        :key="wishlistItem.gameId"
-        class="wishlist-item"
-      >
-        <img :src="wishlistItem.game.info.thumb" />
+      <div v-for="wishlistItem in wishlistStore.wishlist" class="wishlist-item">
+        <router-link :to="'/games/' + wishlistItem.gameId" :key="wishlistItem.gameId">
+          <img :src="wishlistItem.game.info.thumb" />
+        </router-link>
         <div class="wishlist-item-detail">
           <div v-if="isOnSale(wishlistItem)" class="sale-alert">
             <img src="https://www.pngmart.com/files/15/Red-Exclamation-Mark-PNG-Pic.png" alt="Sale Alert" />
           </div>
           <div v-else>
           </div>
-          <p> {{ wishlistItem.game.info.title }}</p>
-
+          <router-link :to="'/games/' + wishlistItem.gameId" :key="wishlistItem.gameId">
+            <p> {{ wishlistItem.game.info.title }}</p>
+          </router-link>
           <button @click="wishlistStore.removeGameFromWishlist(wishlistItem.gameId)">
             Remove from wishlist
           </button>
         </div>
-      </router-link>
+      </div>
     </div>
   </div>
 </template>
+
 
 <script setup lang="ts">
 import Spinner from '@/components/Spinner.vue';
