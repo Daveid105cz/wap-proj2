@@ -22,7 +22,7 @@
             <GroupedDealsListBlock :isVertical="true"
                 v-for="game in searchStore.groupedDeals" :key="game.id" :deals="game.deals" 
                 :title="game.title" :thumbnailSrc="game.thumbnail" :get-deal-item-link="getStoreThumb"
-                :headerNavigationLink="'/game/'+game.id" :headerNavigationQuery="{}" :show-spinner="false" />
+                :headerNavigationLink="'/games/'+game.id" :headerNavigationQuery="{}" :show-spinner="false" />
         </div>
         
         <Spinner class="load-spinner" v-if="searchStore.isLoading" />
