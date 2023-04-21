@@ -64,6 +64,11 @@ export class CheapSharkService {
         return response.data;
     }
 
+    public async getDealInfo(dealId: number): Promise<GameDeal> {
+      const response = await client.get(`/deals?id=${dealId}`);
+      return response.data;
+  }
+
     public async getGamesByIds(gameIds: number[]): Promise<Game[]> {
         const response = await client.get(`/games?ids=${gameIds.join(",")}`);
         //the response is an object with the game id as the property names

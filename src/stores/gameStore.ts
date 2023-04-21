@@ -3,20 +3,8 @@ import apiService from '../services/CheapSharkService'
 import type { GameDeal } from '@/types/GameDeal';
 import type { Game } from '@/types/Game';
 import type { GameStore } from '@/types/GameStore';
-import { SortBy, SortOrder, type SearchFilter } from '@/types/SearchFilter';
+import { SortBy, SortOrder } from '@/types/SearchFilter';
 import userSettings from '@/services/UserSettings';
-
-interface GroupedDeal {
-    id: number;
-    title: string;
-    thumbnail: string;
-    deals: GameDeal[];
-};
-
-interface GroupedDealByGame {
-    gameID: number;
-    deals: GameDeal[];
-};
 
 export const useGameStore = defineStore({
     id: 'game',
@@ -28,11 +16,18 @@ export const useGameStore = defineStore({
         sortBy: SortBy.DealRating,
         sortOrder: SortOrder.Ascending,
         dealsByGame: [] as GameDeal[],
-        groupedDealsByGame: [] as GroupedDealByGame[],
         page: 1,
         totalCount: 0,
         pageSize: 40,
-        stores: [] as GameStore[]
+        stores: [] as GameStore[],
+
+        gameInfo: {
+            metacriticScore: 0,
+            steamRatingText: "",
+            steamRatingPercent: "",
+            steamRatingCount: "",
+            releaseDate: 0
+        }
     }),
     actions: {
         async loadStores(){
@@ -40,17 +35,12 @@ export const useGameStore = defineStore({
         },
         async fetchGame(id: string) {
             this.isLoading = true;
-            this.game = await apiService.getGame(id);
-            this.isLoading = false;
+            this.game = await apiService.getGame(id);                    
             this.gameId = Number(id);
-            this.isWishlisted = userSettings.isOnWishlist(this.gameId);
-        },
-        async fetchDealsByGame() {
-            this.isLoading = true;
-            const dealsByGame = await apiService.getDeals();
-            this.dealsByGame = dealsByGame;
-            this.groupedDealsByGame = this.groupDealsByStore(dealsByGame);
+            const gameDeal = await apiService.getDealInfo(this.game.deals[0].dealID)
+            this.getGameInfo(gameDeal);
             this.isLoading = false;
+            this.isWishlisted = userSettings.isOnWishlist(this.gameId);
         },
         toggleWishlist() {
             this.isWishlisted = !this.isWishlisted;
@@ -60,21 +50,12 @@ export const useGameStore = defineStore({
                 userSettings.removeFromWishlist(this.gameId);
         },
 
-        groupDealsByStore(deals: GameDeal[]): GroupedDealByGame[] {
-            return deals.reduce((acc: GroupedDealByGame[], deal: GameDeal) => {
-                const store = acc.find(x => x.gameID === deal.gameID);
-                if (store)
-                    store.deals.push(deal);
-                else {
-                    acc.push({
-                        gameID: deal.gameID,
-                        deals: [deal]
-                    });
-                }
-                return acc;
-            }, []);
-        }
-        
-        
+        getGameInfo(gameDeal: any) {
+            this.gameInfo.metacriticScore = gameDeal.gameInfo.metacriticScore;
+            this.gameInfo.steamRatingText = gameDeal.gameInfo.steamRatingText;
+            this.gameInfo.steamRatingPercent = gameDeal.gameInfo.steamRatingPercent;
+            this.gameInfo.steamRatingCount = gameDeal.gameInfo.steamRatingCount;
+            this.gameInfo.releaseDate = gameDeal.gameInfo.releaseDate;
+        },
     }
 });

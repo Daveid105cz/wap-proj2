@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <Header></Header> -->
     <SearchBar></SearchBar>
     <GameWindow :id="value"></GameWindow>
   </div>
@@ -10,7 +9,6 @@
 
 import GameWindow from "@/components/game/GameWindow.vue";
 import SearchBar from '../components/SearchBar.vue'
-// import Header from '../components/Header.vue'
 
 export default {
   components: {

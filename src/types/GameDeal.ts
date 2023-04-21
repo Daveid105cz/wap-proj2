@@ -1,5 +1,3 @@
-
-
 export interface GameDeal {
     title: string;
     dealID: number;

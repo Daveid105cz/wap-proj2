@@ -32,9 +32,6 @@
 import { defineComponent, computed } from "vue";
 import { useHomeStore } from "@/stores/homeStore";
 import Spinner from '@/components/Spinner.vue';
-import { getSortByWithNames } from '@/types/SearchFilter';
-import type { GameStore, GameStoreThumbnail } from '@/types/GameStore';
-
 
 export default defineComponent({
   components: {
@@ -45,11 +42,8 @@ export default defineComponent({
   setup() {
     const homeStore = useHomeStore();
     const isLoading = computed(() => homeStore.isLoading);
-    const groupedDeals = computed(() => homeStore.groupedDeals);
     const topDeals = computed(() => homeStore.groupedDeals.slice(0, 10));
     const stores = computed(() => homeStore.stores);
-
-
 
     return {
       isLoading,

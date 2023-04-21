@@ -8,11 +8,11 @@
         <div class="right-column">
           <h2 class="game-title">{{ game.info.title }}</h2>
           <div class="game-info">
-            <p><strong>Metacritic Score:</strong> {{ groupedDealsByGame[0].deals[0].metacriticScore }}</p>
-            <p><strong>Steam Rating Text:</strong> {{ groupedDealsByGame[0].deals[0].steamRatingText }}</p>
-            <p><strong>Steam Rating Percent:</strong> {{ groupedDealsByGame[0].deals[0].steamRatingPercent }}</p>
-            <p><strong>Steam Rating Count:</strong> {{ groupedDealsByGame[0].deals[0].steamRatingCount }}</p>
-            <p><strong>Release Date:</strong> {{ new Date(groupedDealsByGame[0].deals[0].releaseDate * 1000).toLocaleDateString() }}</p>
+            <p><strong>Metacritic Score:</strong> {{ gameInfo.metacriticScore }}</p>
+            <p><strong>Steam Rating Text:</strong> {{ gameInfo.steamRatingText }}</p>
+            <p><strong>Steam Rating Percent:</strong> {{ gameInfo.steamRatingPercent }}</p>
+            <p><strong>Steam Rating Count:</strong> {{ gameInfo.steamRatingCount }}</p>
+            <p><strong>Release Date:</strong> {{ new Date(gameInfo.releaseDate * 1000).toLocaleDateString() }}</p>
           </div>
           <button class="wishlist-icon" :class="{'added':gameStore.isWishlisted}" @click="gameStore.toggleWishlist">
                 <svg width="800px" height="800px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" stroke-width="3" stroke="#000000" fill="none"><path d="M9.06,25C7.68,17.3,12.78,10.63,20.73,10c7-.55,10.47,7.93,11.17,9.55a.13.13,0,0,0,.25,0c3.25-8.91,9.17-9.29,11.25-9.5C49,9.45,56.51,13.78,55,23.87c-2.16,14-23.12,29.81-23.12,29.81S11.79,40.05,9.06,25Z"/></svg>
@@ -24,7 +24,7 @@
       </div>
       <div class="stores-grid">
           <div v-for="(deal, index) in game.deals" :key="index" class="store-card">
-            <a :href="`https://www.cheapshark.com/redirect?dealID=${deal.dealID}`">
+            <a :href="`https://www.cheapshark.com/redirect?dealID=${deal.dealID}`" target="_blank">
               <div class="top-deal-store">
                 <img :src="getStoreBanner(deal.storeID)" />
               </div>
@@ -64,27 +64,23 @@ export default defineComponent({
     const gameStore = useGameStore();
     const isLoading = computed(() => gameStore.isLoading);
     const game = computed(() => gameStore.game);
-    const groupedDealsByGame = computed(() => gameStore.groupedDealsByGame);
+    const gameInfo = computed(() => gameStore.gameInfo);
 
     return {
       isLoading,
       game, 
-      groupedDealsByGame,
-      gameStore
+      gameStore,
+      gameInfo
     };
   },
   created() {
       this.fetchGame(this.$props.id);
-      this.fetchDealsByGame();
       this.getStores();
       
     },
   methods: {
       async fetchGame(id: string) {
         await useGameStore().fetchGame(id);
-      },
-      async fetchDealsByGame() {
-        await useGameStore().fetchDealsByGame();
       },
       getStoreBanner(storeID: number){
         const store = useGameStore().stores.find(s => s.storeID === storeID);
