@@ -5,7 +5,7 @@ import type { Game } from '@/types/Game';
 import userSettings from '@/services/UserSettings';
 
 
-interface WishlistItem {
+export interface WishlistItem {
     gameId: number;
     game: Game;
 };

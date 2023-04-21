@@ -1,25 +1,51 @@
 <template>
+  <div>
     <SearchBar></SearchBar>
     <div class="wish-list-title"> Wishlist </div>
     <div class="wish-list">
       <Spinner class="load-spinner" v-if="wishlistStore.isLoading" />
-      <router-link v-for="wishlistItem in wishlistStore.wishlist" :to="'/games/' + wishlistItem.gameId" :key="wishlistItem.gameId" class="wishlist-item">
+      <router-link
+        v-for="wishlistItem in wishlistStore.wishlist"
+        :to="'/games/' + wishlistItem.gameId"
+        :key="wishlistItem.gameId"
+        class="wishlist-item"
+      >
         <img :src="wishlistItem.game.info.thumb" />
         <div class="wishlist-item-detail">
-          <p>{{ wishlistItem.game.info.title }}</p>
-          <button @click="wishlistStore.removeGameFromWishlist(wishlistItem.gameId)">Remove from wishlist</button>
+          <div v-if="isOnSale(wishlistItem)" class="sale-alert">
+            <img src="https://www.pngmart.com/files/15/Red-Exclamation-Mark-PNG-Pic.png" alt="Sale Alert" />
+          </div>
+          <div v-else>
+          </div>
+          <p> {{ wishlistItem.game.info.title }}</p>
+
+          <button @click="wishlistStore.removeGameFromWishlist(wishlistItem.gameId)">
+            Remove from wishlist
+          </button>
         </div>
       </router-link>
     </div>
-  </template>
-  
+  </div>
+</template>
+
 <script setup lang="ts">
 import Spinner from '@/components/Spinner.vue';
+import type { WishlistItem } from '@/stores/wishlistStore';
 import SearchBar from '@/components/SearchBar.vue';
 import {useWishlistStore} from '@/stores/wishlistStore';
 
 const wishlistStore = useWishlistStore();
 wishlistStore.loadWishlist();
+
+function isOnSale(item: WishlistItem): boolean {
+  for (const deal of item.game.deals) {
+    if (Number(deal.savings) > 0) {
+      return true;
+    }
+  }
+  return false;
+}
+
 
 </script>
 
@@ -73,6 +99,14 @@ wishlistStore.loadWishlist();
 .wishlist-item button:hover{
     background-color: #ff3333;
 }
+
+.sale-alert img {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: -35px;
+    left: 150px;
+  }
 .wishlist-item p{
     margin: 0;
     color: var(--color-heading);
