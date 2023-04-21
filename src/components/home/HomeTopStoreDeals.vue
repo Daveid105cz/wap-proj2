@@ -15,18 +15,18 @@
           <div class="deal-items-container">
             <div v-for="(deal, dealIndex) in groupedDeal.deals.slice(0, 4)" :key="dealIndex" class="deal-item">
               
-              <router-link :to="'/game/' + deal.gameID">
+              <router-link :to="'/games/' + deal.gameID">
                 <img :src="deal.thumb" width="100" height="80" />
               </router-link>
 
               <div class="deal-info">
-                <router-link :to="'/game/' + deal.gameID">
+                <router-link :to="'/games/' + deal.gameID">
                   <div class="top-deal-title">{{ deal.title }}</div>
                 </router-link>
-                <div class="top-deal-price">Deal rating: {{ deal.dealRating }}</div>
-                <div class="top-deal-price">Original price: {{ deal.normalPrice }}$</div>
-                <div class="top-deal-price">Sale price: {{ deal.salePrice }}$</div>
-                <div class="top-deal-price">Savings: {{Math.round(Number(  deal.savings))  }}%</div>
+                <div class="top-deal-price"><b style="font-weight: bold;">Deal rating:</b> {{ deal.dealRating }}</div>
+                <div class="top-deal-price"><b style="font-weight: bold;">Original price:</b> {{ deal.normalPrice }}$</div>
+                <div class="top-deal-price"><b style="font-weight: bold;">Sale price:</b> {{ deal.salePrice }}$</div>
+                <div class="top-deal-price"><b style="font-weight: bold;">Savings:</b> {{Math.round(Number(deal.savings))}}%</div>
               </div>
             </div>
           </div>

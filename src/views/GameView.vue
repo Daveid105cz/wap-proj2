@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- <Header></Header> -->
-    <GameSearch></GameSearch>
+    <SearchBar></SearchBar>
     <GameWindow :id="value"></GameWindow>
   </div>
 </template>
@@ -9,13 +9,13 @@
 <script lang="ts">
 
 import GameWindow from "@/components/game/GameWindow.vue";
-import GameSearch from '../components/home/HomeSearch.vue'
+import SearchBar from '../components/SearchBar.vue'
 // import Header from '../components/Header.vue'
 
 export default {
   components: {
     GameWindow,
-    GameSearch
+    SearchBar
   },
   data() {
     return {

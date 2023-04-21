@@ -5,7 +5,7 @@
       <Spinner v-if="isLoading" />
       <div v-else class="top-deals-grid">
         <div v-for="(groupedDeal, index) in topDeals" :key="groupedDeal.id">
-          <RouterLink :to="'/game/' + groupedDeal.deals[0].gameID" class="top-deal-container">
+          <RouterLink :to="'/games/' + groupedDeal.deals[0].gameID" class="top-deal-container">
             <div class="top-deal-image">
               <img :src="groupedDeal.deals[0].thumb" width="400" height="600" />
               <div class="top-deal-details">
@@ -108,6 +108,7 @@ export default defineComponent({
   margin-top: 10px;
   display: flex;
   justify-content: center;
+  
 }
 .top-deal-store img {
   max-width: 50%;
@@ -122,13 +123,14 @@ export default defineComponent({
 
 .top-deal {
   position: relative;
-  
+  transition: background-color 0.4s ease-in-out;
   
 }
 
 .top-deals-grid img {
   width: 300px;
   height: 200px;
+  
 }
 
 
@@ -141,6 +143,7 @@ export default defineComponent({
   width: 100%;
   height: 100%;
   object-fit: cover;
+  
   
 }
 
@@ -156,6 +159,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: background-color 0.4s ease-in-out;
   
 }
 

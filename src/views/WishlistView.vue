@@ -1,19 +1,21 @@
 <template>
-    <h1>Wishlist</h1>
+    <SearchBar></SearchBar>
+    <div class="wish-list-title"> Wishlist </div>
     <div class="wish-list">
-        <Spinner class="load-spinner" v-if="wishlistStore.isLoading" />
-        <div class="wishlist-item" v-for="wishlistItem in wishlistStore.wishlist" :key="wishlistItem.gameId">
-            <img :src="wishlistItem.game.info.thumb" />
-            <div class="wishlist-item-detail">
-                <p>{{ wishlistItem.game.info.title }}</p>
-                <button @click="wishlistStore.removeGameFromWishlist(wishlistItem.gameId)">Remove from wishlist</button>
-            </div>
+      <Spinner class="load-spinner" v-if="wishlistStore.isLoading" />
+      <router-link v-for="wishlistItem in wishlistStore.wishlist" :to="'/games/' + wishlistItem.gameId" :key="wishlistItem.gameId" class="wishlist-item">
+        <img :src="wishlistItem.game.info.thumb" />
+        <div class="wishlist-item-detail">
+          <p>{{ wishlistItem.game.info.title }}</p>
+          <button @click="wishlistStore.removeGameFromWishlist(wishlistItem.gameId)">Remove from wishlist</button>
         </div>
+      </router-link>
     </div>
-</template>
-
+  </template>
+  
 <script setup lang="ts">
 import Spinner from '@/components/Spinner.vue';
+import SearchBar from '@/components/SearchBar.vue';
 import {useWishlistStore} from '@/stores/wishlistStore';
 
 const wishlistStore = useWishlistStore();
@@ -22,6 +24,14 @@ wishlistStore.loadWishlist();
 </script>
 
 <style scoped>
+
+.wish-list-title{
+    font-size: 70px;
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    font-family: "Mogra-Regular";
+}
 
 .wish-list{
     display: grid;
@@ -37,6 +47,7 @@ wishlistStore.loadWishlist();
     padding: 1rem;
     gap: 1rem;
     border-radius: 24px;
+    background-color: #05081a8c;
     height: 14em;
 }
 .wishlist-item img{
@@ -66,6 +77,11 @@ wishlistStore.loadWishlist();
     margin: 0;
     color: var(--color-heading);
     font-size: 1.2rem;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.wishlist-item:hover {
+  background-color: #000000bd;
 }
 
 </style>

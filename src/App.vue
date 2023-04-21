@@ -99,13 +99,13 @@ nav a:first-of-type {
   font-family: "KdamThmorPro-Regular";
   src: local("KdamThmorPro-Regular"),   url(./assets/fonts/KdamThmorPro-Regular.ttf) format("truetype");}
 
-/*
+
   #app {
-    background-image: url('@/./assets/vecteezy_abstract-modern-graphic-element-dynamical-colored-forms-and_19616310.svg'); 
+    background-image: url('@/./assets/back_clouds.svg'); 
     height: 100%;
     width: 100%;
     background-size: contain;
     background-size: cover;
-  } */
+  } 
 
 </style>

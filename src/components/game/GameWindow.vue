@@ -152,6 +152,8 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 20px;
+  background-color: #05081a8c;
 }
 
 .top-deal-store {
