@@ -9,10 +9,10 @@
             <div class="top-deal-image">
               <img :src="groupedDeal.deals[0].thumb" width="400" height="600" />
               <div class="top-deal-details">
-                <div class="top-deal-price">Deal rating: {{ groupedDeal.deals[0].dealRating }}</div>
-                <div class="top-deal-price">Original price: {{ groupedDeal.deals[0].normalPrice }}$</div>
-                <div class="top-deal-price">Sale price: {{ groupedDeal.deals[0].salePrice }}$</div>
-                <div class="top-deal-price">Savings: {{Math.round(Number( groupedDeal.deals[0].savings))  }}%</div>
+                <div class="top-deal-price"><b style="font-weight: bold;">Deal rating: </b>{{ groupedDeal.deals[0].dealRating }}</div>
+                <div class="top-deal-price"><b style="font-weight: bold;">Original price: </b>{{ groupedDeal.deals[0].normalPrice }}$</div>
+                <div class="top-deal-price"><b style="font-weight: bold;">Sale price: </b>{{ groupedDeal.deals[0].salePrice }}$</div>
+                <div class="top-deal-price"><b style="font-weight: bold;">Savings: </b>{{Math.round(Number( groupedDeal.deals[0].savings))  }}%</div>
                 
                 <div class="top-deal-store">
                   <img :src="getStoreBanner(groupedDeal.deals[0].storeID)" />
@@ -92,9 +92,6 @@ export default defineComponent({
 .top-deals-container {
   display: flex;
   justify-content: center;
-  
-  
-  
 }
 .top-deal-store {
   width: 210px;
@@ -112,56 +109,23 @@ export default defineComponent({
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-auto-rows: minmax(0px, auto);
-  grid-gap: 5px;
-}
-
-.top-deal {
-  position: relative;
-  transition: background-color 0.4s ease-in-out;
-  
+  grid-gap: 20px 10px;
+  border-radius: 20px;
 }
 
 .top-deals-grid img {
   width: 300px;
-  height: 200px;
+  height: 300px;
   
 }
 
-
-.game-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  
-  
-}
-
-.game-details {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 2px;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: background-color 0.4s ease-in-out;
-  
-}
 
 .top-deal-image {
   position: relative;
   height: 300px;
   overflow: hidden;
   cursor: pointer;
+  transition: background-color 0.4s ease-in-out;
 }
 
 .top-deal-image img {
@@ -199,15 +163,7 @@ export default defineComponent({
   font-weight: bold;
 }
 
-.store-details {
-  display: none;
-}
-
-.top-deal:hover .game-image {
-  opacity: 0;
-}
-
-.top-deal:hover .store-details {
-  display: block;
+.top-deal-title :hover{
+  color: #313131;
 }
 </style>

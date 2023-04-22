@@ -8,11 +8,11 @@
         <div class="right-column">
           <h2 class="game-title">{{ game.info.title }}</h2>
           <div class="game-info">
-            <p><strong>Metacritic Score:</strong> {{ gameInfo.metacriticScore }}</p>
-            <p><strong>Steam Rating Text:</strong> {{ gameInfo.steamRatingText }}</p>
-            <p><strong>Steam Rating Percent:</strong> {{ gameInfo.steamRatingPercent }}</p>
-            <p><strong>Steam Rating Count:</strong> {{ gameInfo.steamRatingCount }}</p>
-            <p><strong>Release Date:</strong> {{ new Date(gameInfo.releaseDate * 1000).toLocaleDateString() }}</p>
+            <p><b style="font-weight: bold;">Metacritic Score:</b> {{ gameInfo.metacriticScore }}</p>
+            <p><b style="font-weight: bold;">Steam Rating Text:</b> {{ gameInfo.steamRatingText }}</p>
+            <p><b style="font-weight: bold;">Steam Rating Percent:</b> {{ gameInfo.steamRatingPercent }}</p>
+            <p><b style="font-weight: bold;">Steam Rating Count:</b> {{ gameInfo.steamRatingCount }}</p>
+            <p><b style="font-weight: bold;">Release Date:</b> {{ new Date(gameInfo.releaseDate * 1000).toLocaleDateString() }}</p>
           </div>
           <button class="wishlist-icon" :class="{'added':gameStore.isWishlisted}" @click="gameStore.toggleWishlist">
                 <svg width="800px" height="800px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" stroke-width="3" stroke="#000000" fill="none"><path d="M9.06,25C7.68,17.3,12.78,10.63,20.73,10c7-.55,10.47,7.93,11.17,9.55a.13.13,0,0,0,.25,0c3.25-8.91,9.17-9.29,11.25-9.5C49,9.45,56.51,13.78,55,23.87c-2.16,14-23.12,29.81-23.12,29.81S11.79,40.05,9.06,25Z"/></svg>
@@ -28,9 +28,9 @@
               <div class="top-deal-store">
                 <img :src="getStoreBanner(deal.storeID)" />
               </div>
-              <p><strong>Store price: </strong>{{ deal.price }}$</p>
-              <p><strong>Retail price: </strong>{{ deal.retailPrice }}$</p>
-              <p><strong>Savings: </strong>{{Math.round(Number(deal.savings))  }}%</p>
+              <p><b style="font-weight: bold;">Store price: </b>{{ deal.price }}$</p>
+              <p><b style="font-weight: bold;">Retail price: </b>{{ deal.retailPrice }}$</p>
+              <p><b style="font-weight: bold;">Savings: </b>{{Math.round(Number(deal.savings))  }}%</p>
             </a>
           </div>
         </div>
@@ -46,7 +46,6 @@
 import { defineComponent, computed } from "vue";
 import { useGameStore } from "@/stores/gameStore";
 import Spinner from '@/components/Spinner.vue';
-import { getSortByWithNames } from '@/types/SearchFilter';
 
 
 export default defineComponent({
@@ -152,6 +151,15 @@ export default defineComponent({
   background-color: #05081a8c;
 }
 
+.store-card a {
+  color: rgb(138, 137, 137);
+}
+
+.stores-grid :hover{
+  background-color: #383a41e0;
+  border-radius: 20px;
+}
+
 .top-deal-store {
   margin-top: 1rem;
   display: flex;
@@ -172,8 +180,7 @@ export default defineComponent({
     background-color: var(--color-background-mute);
     border: 1px solid #ccc;
     border-radius: 8px;
-    /* width: 16em; */
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 .wishlist-icon p{
     margin: 0;

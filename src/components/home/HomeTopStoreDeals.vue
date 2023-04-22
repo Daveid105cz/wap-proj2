@@ -16,7 +16,7 @@
             <div v-for="(deal, dealIndex) in groupedDeal.deals.slice(0, 4)" :key="dealIndex" class="deal-item">
               
               <router-link :to="'/games/' + deal.gameID">
-                <img :src="deal.thumb" width="100" height="80" />
+                <img :src="deal.thumb" width="100" height="100" />
               </router-link>
 
               <div class="deal-info">
@@ -49,7 +49,6 @@
     setup() {
       const homeStore = useHomeStore();
       const isLoading = computed(() => homeStore.isLoading);
-      const groupedDeals = computed(() => homeStore.groupedDealsBystore);
       const topDeals = computed(() => homeStore.groupedDealsBystore.slice(0, 6));
   
       return {
@@ -95,7 +94,7 @@
   margin-bottom: 20px;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
-  width: 320px;
+  width: 340px;
 }
 
 .deals-container {
@@ -128,22 +127,19 @@
 }
 
 .top-deal-title {
-  margin: 0;
+  margin: 4px;
   font-size: 15px;
   font-weight: bold;
   color: white;
 }
 
+.top-deal-title :hover {
+  color: #313131;
+  }
+
 .top-deal-price {
   margin: 0;
   font-size: 14px;
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 .spinner-container {

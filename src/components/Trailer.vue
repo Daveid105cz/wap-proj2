@@ -1,7 +1,7 @@
 <template>
     <div class="trailer">
       <div class="trailer-text">
-        Trailer Here
+        WAP 2022/2023 Project assignment
       </div>
     </div>
   </template>
@@ -22,10 +22,11 @@
   }
   
   .trailer-text {
-    font-size: 24px;
+    font-size: 30px;
     font-weight: bold;
     text-align: center;
     color: #333;
+    font-family: "KdamThmorPro-Regular";
   }
   </style>
   

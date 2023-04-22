@@ -78,8 +78,5 @@
     margin-bottom: 5px;
   }
   
-  .contact p {
-    margin: 0;
-  }
   </style>
   

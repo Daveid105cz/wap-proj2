@@ -35,7 +35,22 @@
     align-items: center;
     background-color: #f2f2f2;
     padding: 16px;
-    
+  }
+
+  .header a:hover{
+    color: #666;
+  }
+
+  .nav-links-left a:hover {
+  color: #666;
+  }
+
+  .nav-links-right a:hover {
+  color: #666;
+  }
+
+  .nav-links-right :hover {
+  color: #666;
   }
   
   .logo {
@@ -72,19 +87,11 @@
     margin-right: 30px;
     justify-content: flex-end;
   }
-
+  
   .nav-links-right a {
-    color: #333;
-  }
-  
-  .nav-links a {
     margin-right: 16px;
-    text-decoration: none;
     color: #333;
   }
-  
-  .nav-links a.active {
-    font-weight: bold;
-  }
+
   </style>
   

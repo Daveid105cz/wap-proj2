@@ -116,4 +116,9 @@ function isOnSale(item: WishlistItem): boolean {
   background-color: #000000bd;
 }
 
+.wishlist-item a:hover{
+  background-color: #383a412c;
+  border-radius: 20px;
+}
+
 </style>

@@ -23,9 +23,9 @@ export const useGameStore = defineStore({
 
         gameInfo: {
             metacriticScore: 0,
-            steamRatingText: "",
-            steamRatingPercent: "",
-            steamRatingCount: "",
+            steamRatingText: "Data unavailable",
+            steamRatingPercent: "Data unavailable",
+            steamRatingCount: "Data unavailable",
             releaseDate: 0
         }
     }),

@@ -1,4 +1,5 @@
 <template>
+    <SearchBar></SearchBar>
     <div class="stores-list">
         <Spinner class="load-spinner" v-if="storesStore.isLoading" />
         <GroupedDealsListBlock v-for="store in storesStore.activeStores" :key="store.storeID" 
@@ -14,6 +15,8 @@ import Spinner from '@/components/Spinner.vue';
 import GroupedDealsListBlock from '@/components/GroupedDealsListBlock.vue';
 const storesStore = useStoresStore();
 storesStore.loadStores();
+
+import SearchBar from '../components/SearchBar.vue'
 
 
 function getStoreThumb(storeUrl: string){
