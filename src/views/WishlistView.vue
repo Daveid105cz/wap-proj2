@@ -66,7 +66,6 @@ function isOnSale(item: WishlistItem): boolean {
 .wishlist-item{
     display: flex;
     flex-direction: row;
-    /*dont height stretch the children*/
     align-items: center;
     border: 1px solid white;
     padding: 1rem;

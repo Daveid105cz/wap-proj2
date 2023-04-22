@@ -20,7 +20,6 @@ export interface SearchFilter{
 };
 
 export function modifyFilterByQueryObj(filter: SearchFilter, queryObj: any) {
-    // const filter: SearchFilter = {};
     if (queryObj.lowerPrice)
         filter.lowerPrice = Number(queryObj.lowerPrice);
     else

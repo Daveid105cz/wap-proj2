@@ -11,7 +11,6 @@
 <script setup lang="ts">
 import { useStoresStore } from '@/stores/storesStore';
 import Spinner from '@/components/Spinner.vue';
-import { useRouter } from 'vue-router';
 import GroupedDealsListBlock from '@/components/GroupedDealsListBlock.vue';
 const storesStore = useStoresStore();
 storesStore.loadStores();
