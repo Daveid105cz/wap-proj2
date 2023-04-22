@@ -1,22 +1,26 @@
 <template>
     <div class="search">
         <h1>Search</h1>
-        <FiltersPanel class="filters-panel"/>
-        <div class="sorting-options">
-            <label class="my-label" for="sort-by-select">Sort by:</label>
-            <select class="my-input" v-model.number="searchStore.sortBy">
-                <option v-for="sortOption in getSortByWithNames()" :value="sortOption.value">{{ sortOption.name }}</option>
-            </select>
-            <p class="my-label">Sort order:</p>
-            <SortOrderToggle v-model="searchStore.sortOrder" :is-alphabetical="isAlphabetical"/>
-            <button class="search-button" @click="commitSearch">Search</button>
-        </div>
-        <div class="deals-header">
-            <p>Store</p>
-            <p>Game title</p>
-            <p>Deal rating</p>
-            <p>New price</p>
-            <p>Normal price</p>
+        <div class="search-headers">
+            <div class="search-input">
+                <SearchInput v-model="searchStore.searchQuery" @search="commitSearch"/>
+            </div>
+            <FiltersPanel class="filters-panel"/>
+            <div class="sorting-options">
+                <label class="my-label" for="sort-by-select">Sort by:</label>
+                <select class="my-input" v-model.number="searchStore.sortBy">
+                    <option v-for="sortOption in getSortByWithNames()" :value="sortOption.value">{{ sortOption.name }}</option>
+                </select>
+                <p class="my-label">Sort order:</p>
+                <SortOrderToggle v-model="searchStore.sortOrder" :is-alphabetical="isAlphabetical"/>
+            </div>
+            <div class="deals-header">
+                <p>Store</p>
+                <p>Game title</p>
+                <p>Deal rating</p>
+                <p>New price</p>
+                <p>Normal price</p>
+            </div>
         </div>
         <div v-if="!searchStore.isLoading" class="games-list">
             <GroupedDealsListBlock :isVertical="true"
@@ -49,7 +53,7 @@ import { computed, watch } from 'vue';
 import GroupedDealsListBlock from '@/components/GroupedDealsListBlock.vue';
 import Paginator from '@/components/search/Paginator.vue';
 import type { GameDeal } from '@/types/GameDeal';
-
+import SearchInput from '@/components/SearchInput.vue';
 
 const currentRoute = useRoute();
 const query = currentRoute.query;
@@ -92,6 +96,15 @@ function getStoreThumb(deal: GameDeal){
 </script>
 
 <style scope>
+.search-headers{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1em;
+    background-color: var(--color-background-mute);
+    padding: 1em;
+    border-radius: 12px 12px 0 0;
+}
 .deals-header{
     display: grid;
     grid-template-columns: 9em 2fr 6em 6em 6em;
@@ -99,7 +112,6 @@ function getStoreThumb(deal: GameDeal){
     margin-bottom: 1em;
     gap: 1rem;
     padding: 0.5rem;
-    background-color: var(--color-background-mute);
     border-top: 4px solid var(--color-background);
 }
 .deals-header p{
@@ -114,19 +126,12 @@ function getStoreThumb(deal: GameDeal){
     margin-top: 1em;
 }
 
-.filters-panel{
-    background-color: var(--color-background-mute);
-    padding: 1em;
-    border-radius: 12px 12px 0 0;
-}
 .sorting-options{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 1rem;
     align-items: center;
-    background-color: var(--color-background-mute);
-    padding: 1em;
 }
 .search-button{
     margin-left: auto;
