@@ -30,7 +30,7 @@
 <script setup lang="ts">
 import Spinner from '@/components/Spinner.vue';
 import type { WishlistItem } from '@/stores/wishlistStore';
-import SearchBar from '@/components/SearchBar.vue';
+import SearchBar from '@/components/search/SearchBar.vue';
 import {useWishlistStore} from '@/stores/wishlistStore';
 
 const wishlistStore = useWishlistStore();

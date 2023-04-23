@@ -8,7 +8,7 @@
 <script lang="ts">
 
 import GameWindow from "@/components/game/GameWindow.vue";
-import SearchBar from '../components/SearchBar.vue'
+import SearchBar from '../components/search/SearchBar.vue'
 
 export default {
   components: {

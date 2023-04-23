@@ -16,7 +16,7 @@ import GroupedDealsListBlock from '@/components/GroupedDealsListBlock.vue';
 const storesStore = useStoresStore();
 storesStore.loadStores();
 
-import SearchBar from '../components/SearchBar.vue'
+import SearchBar from '../components/search/SearchBar.vue'
 
 
 function getStoreThumb(storeUrl: string){

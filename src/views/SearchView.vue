@@ -53,7 +53,7 @@ import { computed, watch } from 'vue';
 import GroupedDealsListBlock from '@/components/GroupedDealsListBlock.vue';
 import Paginator from '@/components/search/Paginator.vue';
 import type { GameDeal } from '@/types/GameDeal';
-import SearchInput from '@/components/SearchInput.vue';
+import SearchInput from '@/components/search/SearchInput.vue';
 
 const currentRoute = useRoute();
 const query = currentRoute.query;
