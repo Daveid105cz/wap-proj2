@@ -1,4 +1,5 @@
 <template>
+    <div class="stores-title">Stores</div>
     <SearchBar></SearchBar>
     <div class="stores-list">
         <Spinner class="load-spinner" v-if="storesStore.isLoading" />
@@ -32,5 +33,12 @@ function getStoreThumb(storeUrl: string){
     flex-direction: column;
     gap: 1rem;
     margin-top: 2em;
+}
+
+.stores-title{
+    font-size: 35px;
+    text-align: center;
+    font-family: "KdamThmorPro-Regular";
+    background-color: #05081a60;
 }
 </style>

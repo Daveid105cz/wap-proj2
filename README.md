@@ -1,6 +1,6 @@
 # wap-proj2
 
-This template should help get you started developing with Vue 3 in Vite.
+Implementation of the project assignment WAP: 2022/2023 Web frontend utilizing a selected API
 
 ## Recommended IDE Setup
 

@@ -1,6 +1,6 @@
 <template>
     <div class="search">
-        <h1>Search</h1>
+        <div class="search-title">Search</div>
         <div class="search-headers">
             <div class="search-input">
                 <SearchInput v-model="searchStore.searchQuery" @search="commitSearch"/>
@@ -101,7 +101,7 @@ function getStoreThumb(deal: GameDeal){
     flex-direction: column;
     gap: 0.5rem;
     margin-bottom: 1em;
-    background-color: var(--color-background-mute);
+    background-color: #05081a60;
     padding: 1em;
     border-radius: 12px 12px 0 0;
 }
@@ -145,5 +145,12 @@ function getStoreThumb(deal: GameDeal){
     gap: 1rem;
     background-color: var(--color-background-mute);
     border-radius: 0 0 12px 12px;
+}
+
+.search-title{
+    font-size: 35px;
+    text-align: center;
+    font-family: "KdamThmorPro-Regular";
+    background-color: #05081a60;
 }
 </style>
